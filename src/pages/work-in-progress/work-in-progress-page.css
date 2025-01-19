@@ -1,0 +1,17 @@
+.shock-absorber-size {
+  min-width: 60px;
+  min-height: 60px;
+  width: 16vw;
+  height: 16vw;
+}
+
+.back-to-home-button {
+  min-width: 216.74px;
+  min-height: 40px;
+  width: 57.8vw;
+  height: 10.67vw;
+}
+
+.work-in-progress-container {
+  margin-top: 18vh;
+}

@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #1e1e1e;
+}
+
+#root {
+  padding: 0;
+  height: 100%;
+}
+
+.border-b-thin {
+  border-bottom-width: 0.5px;
+}
+
+.taxi-gradient {
+  background: linear-gradient(226deg, #33d2ff 0%, #3d68de 53.75%, #9845e8 100%);
+}
+
+.small-icon-size {
+  width: 15px;
+  height: 15px;
+}
+
+.restart-icon {
+  margin-bottom: 2px;
+}

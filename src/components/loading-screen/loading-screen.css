@@ -1,0 +1,15 @@
+@keyframes expand {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.expand {
+  animation-duration: 7s;
+  animation-name: expand;
+  animation-fill-mode: forwards;
+}

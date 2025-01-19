@@ -1,0 +1,114 @@
+{
+  "components": {
+    "userProfile": {
+      "level": {
+        "novice": "Novice",
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold"
+      }
+    },
+    "gameStatus": {
+      "players": "Players"
+    },
+    "navMenu": {
+      "main": "Main",
+      "groups": "Groups",
+      "wallet": "Wallet",
+      "friends": "Friends"
+    },
+    "videoItem": {
+      "created": "Created",
+      "publish": "Publish"
+    }
+  },
+  "pages": {
+    "main": {
+      "scannerStates": {
+        "positioning": "Place your head in \n the mind-scanner!",
+        "pending": "Calculating the token hash \n in your memory block!",
+        "success": "Hash found, token recorded \n and extracted to your account!",
+        "error": "Strain your brain! \n Help find the token!)))",
+        "cameraIsNotAllowed": "You have given up mining! But you can earn $DICE by inviting friends and completing tasks!",
+        "cameraIsNotAllowdReg": "To register, you need to create a mental image. Please turn on the camera",
+        "inviteFriend": "Invite a friend"
+      },
+      "diceMining": "DICE Mining",
+      "available": "Available"
+    },
+    "friends": {
+      "inviteText": {
+        "part1": "Get a fixed bonus up to 5K",
+        "part2": "for you and your friend",
+        "part3": "Each time your friend receives a reward, 10% of their reward is also paid to you. In addition, 2% of the reward of your friend's friends will also be paid to you!"
+      },
+      "copyLink": "Copy Link",
+      "friendsInvited": {
+        "1": "Friends",
+        "2": "invited",
+        "premium": "Premium",
+        "basic": "Basic"
+      },
+      "friendsBonus": {
+        "1": "Bonus",
+        "2": "for friends"
+      }
+    },
+    "friendList": {
+      "invitedFriends": "Invited Friends",
+      "empty": "There is no one here yet"
+    },
+    "registration": {
+      "registration": "Registration",
+      "instructions": "To register, you will need to create a mental image. To do this, follow the instructions on the next page. Attention! Your face should be clearly visible on the scanner when you repeat to yourself 'I want to get a lot of $DICE'!",
+      "continue": "Continue",
+      "scannerStates": {
+        "positioning": "Align your face with the mind scanner and repeat to yourself the phrase - 'I want to get a lot of $DICE tokens!'",
+        "pending": "The mind scanner is calculating your mental image.",
+        "success": "Mental image created! Happy mining!",
+        "error": "Attention! Mental field distortion, try again!"
+      }
+    },
+    "workInProgress": {
+      "part1": "Page is",
+      "part2": "under development"
+    },
+    "boosts": {
+      "goto": "Go",
+      "video": {
+        "header": "Publish a video of the token mining process",
+        "description": "Videos are created automatically daily. To create a video, you need to mine tokens at least 10 times!",
+        "price": "10K per photo",
+        "publication": "Publication",
+        "comment": "Comment"
+      },
+      "voucher": {
+        "header": "Buy and hold a voucher from premarket",
+        "description": "Buy and hold a voucher from premarket",
+        "price": "5K"
+      },
+      "holding": {
+        "1k": {
+          "header": "Place an order to buy 100 $TAXI",
+          "description": "Place an order to buy 100 $TAXI",
+          "price": "5K"
+        },
+        "5k": {
+          "header": "Place an order to sell 100 $TAXI",
+          "description": "Place an order to sell 100 $TAXI",
+          "price": "5K"
+        },
+        "10k": {
+          "header": "Buy $TAXI",
+          "description": "Buy $TAXI",
+          "price": "5K"
+        }
+      }
+    },
+    "telegramRedirect": {
+      "title": "Better Experience in Telegram",
+      "description": "This game works best in Telegram. Click below to open in Telegram.",
+      "button": "Open in Telegram"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.video-box-size {
+  height: min(82vw, 40vh);
+  width: min(82vw, 40vh);
+}
+
+.video-container {
+  height: 90%;
+  width: 90%;
+  border-radius: 2.5vw;
+}
+
+.video-overlay-background-mask {
+  mask-image: url(/assets/face-overlay.png);
+  mask-size: 100% 100%;
+}
