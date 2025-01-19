@@ -61,7 +61,7 @@ async function getProfilePhotoUrl(initData: string, userId: number) {
   });
   console.log(resp)
   if (!resp.ok) return null;
-  const blob = await resp.blob();
+  // const blob = await resp.blob();
   return resp?.url;
 }
 
