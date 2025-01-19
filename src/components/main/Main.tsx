@@ -1,6 +1,6 @@
 import {
   useInitData,
-  WebAppProvider,
+  // WebAppProvider,
 } from "@vkruglikov/react-telegram-web-app";
 import {
   createBrowserRouter,
