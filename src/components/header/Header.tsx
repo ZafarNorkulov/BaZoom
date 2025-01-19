@@ -10,7 +10,7 @@ function Header() {
   const [initDataUnsafe] = useInitData();
   const user = initDataUnsafe!.user!;
   const fullName =
-    user.first_name + (user.last_name ? " " + user.last_name : "");
+    user?.first_name + (user?.last_name ? " " + user?.last_name : "");
   const [isSubpage, setIsSubpage] = useState(false);
 
   const location = useLocation();
@@ -21,14 +21,14 @@ function Header() {
   const [gameData, setGameData] = useState<any>(null);
 
   const navigate = useNavigate();
-
+  const userId = user?.id;
   useEffect(() => {
-    if (!user.id) return;
-    fetch("/api/dice/balance?user_id=" + user.id)
+    if (!userId) return;
+    fetch("/api/dice/balance?user_id=" + userId)
       .then((res) => res.json())
       .then((data) => setGameData(data));
-      console.log(gameData)
-  }, [user.id]);
+    console.log(gameData);
+  }, [userId]);
 
   return (
     <div
@@ -37,7 +37,6 @@ function Header() {
         (isSubpage ? " " + "pl-0" : "")
       }
     >
-
       <div className="flex flex-row items-center">
         {isSubpage ? (
           <button
@@ -52,7 +51,7 @@ function Header() {
         <UserProfile
           userLevel={UserLevel.Novice}
           name={fullName}
-          userId={user.id}
+          userId={userId}
         />
       </div>
       <GameStatus />

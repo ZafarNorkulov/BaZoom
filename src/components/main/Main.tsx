@@ -61,14 +61,11 @@ const Main = () => {
   useEffect(() => {
     const tg = (window as any).Telegram.WebApp;
     tg.ready();
-}, []);
-
+  }, []);
 
   return (
     <I18nextProvider i18n={i18next}>
-      <WebAppProvider>
         <RouterProvider router={router}></RouterProvider>
-      </WebAppProvider>
     </I18nextProvider>
   );
 };

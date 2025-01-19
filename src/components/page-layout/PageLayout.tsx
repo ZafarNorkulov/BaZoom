@@ -18,7 +18,10 @@ function TelegramRedirect() {
         {t("pages.telegramRedirect.title", "Better Experience in Telegram")}
       </h1>
       <p className="mb-8 text-gray">
-        {t("pages.telegramRedirect.description", "This game works best in Telegram. Click below to open in Telegram.")}
+        {t(
+          "pages.telegramRedirect.description",
+          "This game works best in Telegram. Click below to open in Telegram.",
+        )}
       </p>
       <a
         href="https://t.me/Holders_Taxi_Bot/game"
@@ -41,9 +44,9 @@ function PageLayout() {
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   // Если нет данных Telegram, показываем страницу перенаправления
-  if (!initData && !initDataUnsafe?.user) {
-    return <TelegramRedirect />;
-  }
+  // if (!initData && !initDataUnsafe?.user) {
+  //   return <TelegramRedirect />;
+  // }
 
   useEffect(() => {
     if (!initData) return;
@@ -53,7 +56,7 @@ function PageLayout() {
 
     // Анимируем до 80% за 5 секунд
     const progressInterval = setInterval(() => {
-      setLoadingProgress(prev => Math.min(prev + 2, 80));
+      setLoadingProgress((prev) => Math.min(prev + 2, 80));
     }, 125);
 
     getProfile(initData).then(() => {
@@ -71,9 +74,7 @@ function PageLayout() {
     });
   }, [initData]);
 
-  return isLoading ? (
-    <LoadingScreen progress={loadingProgress} />
-  ) : (
+  return (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
       <Header />
       <Outlet />

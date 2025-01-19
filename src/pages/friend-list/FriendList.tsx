@@ -92,7 +92,7 @@ function FriendList() {
                 name={e.name}
                 userLevel={UserLevel.Novice}
                 income={e.earned}
-                userId={e.id}
+                userId={e?.id}
               />
             ))
           ) : (

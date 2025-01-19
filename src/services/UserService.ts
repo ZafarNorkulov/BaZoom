@@ -59,9 +59,10 @@ async function getProfilePhotoUrl(initData: string, userId: number) {
       "Init-Data": initData,
     },
   });
+  console.log(resp)
   if (!resp.ok) return null;
   const blob = await resp.blob();
-  return URL.createObjectURL(blob);
+  return resp?.url;
 }
 
 export { getProfile, registerUser, getProfilePhotoUrl, updateProfile };
