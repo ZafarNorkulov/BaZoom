@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.max-container {
+  max-width: 375px;
+  padding: 0 14px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 html {
   background-color: #1e1e1e;
 }
@@ -18,6 +30,40 @@ html {
 .taxi-gradient {
   background: linear-gradient(226deg, #33d2ff 0%, #3d68de 53.75%, #9845e8 100%);
 }
+.text-gradient {
+  background: linear-gradient(
+    225.92deg,
+    #33d2ff 5.73%,
+    #3d68de 54.65%,
+    #9845e8 96.75%
+  );
+  color: transparent;
+  background-clip: text;
+}
+.border-gradient {
+  position: relative;
+  border: 1px solid transparent;
+  background: #1f1f1f;
+  background-clip: padding-box;
+  border-radius: 12px;
+}
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    225.92deg,
+    #33d2ff 5.73%,
+    #3d68de 54.65%,
+    #9845e8 96.75%
+  );
+}
 
 .small-icon-size {
   width: 15px;
@@ -26,4 +72,17 @@ html {
 
 .restart-icon {
   margin-bottom: 2px;
+}
+
+.modal-animation {
+  animation: modal-animation 0.3s ease-in-out;
+}
+@keyframes modal-animation {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

@@ -22,6 +22,9 @@ import BoostsBage from "../../pages/boosts/BoostsPage";
 import VideosPage from "../../pages/videos/VideosPage";
 import FriendsPage from "../../pages/friends/FriendsPage";
 import { useTranslation } from "react-i18next";
+import BuyingBoost from "../../pages/boosts/buying";
+import BuyBoostMarket from "../../pages/boosts/buying/market";
+import BuyBoostExchange from "../../pages/boosts/buying/exchange";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -33,6 +36,9 @@ const router = createBrowserRouter(
       <Route path="/friends/list" element={<FriendList />} />
       <Route path="/boosts" element={<BoostsBage />} />
       <Route path="/boosts/videos" element={<VideosPage />} />
+      <Route path="/boosts/buy" element={<BuyingBoost />} />
+      <Route path="/boosts/buy/exchange" element={<BuyBoostExchange />} />
+      <Route path="/boosts/buy/market" element={<BuyBoostMarket />} />
     </Route>,
     <Route path="/register" element={<RegisterPage />} />,
   ]),
@@ -56,7 +62,7 @@ const Main = () => {
   useEffect(() => {
     const lang = initDataUnsafe?.user?.language_code;
     if (lang) i18n.changeLanguage(lang);
-    else i18n.changeLanguage("en");
+    else i18n.changeLanguage("ru");
   }, [initDataUnsafe]);
   useEffect(() => {
     const tg = (window as any).Telegram.WebApp;

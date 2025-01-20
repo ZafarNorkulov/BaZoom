@@ -12,7 +12,7 @@ function BoostsBage() {
         header={t("pages.boosts.video.header")}
         description={t("pages.boosts.video.description")}
         price={t("pages.boosts.video.price")}
-        link="/boosts/videos"
+        link="/boosts/buy"
         image={videoImage}
         active
       />

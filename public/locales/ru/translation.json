@@ -2,7 +2,7 @@
   "components": {
     "userProfile": {
       "level": {
-        "novice": "Новичек",
+        "novice": "Новичок",
         "bronze": "Бронза",
         "silver": "Серебро",
         "gold": "Золото"
@@ -20,6 +20,9 @@
     "videoItem": {
       "created": "Создано",
       "publish": "Опубликовать"
+    },
+    "questionModal": {
+      "button": "Хорошо"
     }
   },
   "pages": {
@@ -104,6 +107,13 @@
           "price": "5K"
         }
       }
+    },
+    "buyingBoost": {
+      "title": "Покупка буста",
+      "text": "Покупайте и продавайте токены, чтобы намайнить больше DICE!",
+      "exchange": "Купить на бирже",
+      "market": "Купить по рынку",
+      "exchangeText": "Рыба-текст с описание что такое покупка на бирже. Рыба-текст, рыба-текст, текст, текст, текст."
     },
     "telegramRedirect": {
       "title": "Лучший опыт в Telegram",

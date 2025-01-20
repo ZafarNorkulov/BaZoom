@@ -20,7 +20,11 @@
     "videoItem": {
       "created": "Created",
       "publish": "Publish"
+    },
+    "questionModal":{
+      "button":"Ok"
     }
+    
   },
   "pages": {
     "main": {
@@ -104,6 +108,13 @@
           "price": "5K"
         }
       }
+    },
+    "buyingBoost": {
+      "title": "Buying a boost",
+      "text": "Buy and sell tokens to mine more DICE!",
+      "exchange": "Buy on the exchange",
+      "market": "Buy by market",
+      "exchangeText": "Fish is a text with a description of what buying on the stock exchange is. Fish-text, fish-text, text, text, text."
     },
     "telegramRedirect": {
       "title": "Better Experience in Telegram",
