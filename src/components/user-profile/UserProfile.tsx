@@ -4,8 +4,8 @@ import silver from "./assests/silver.svg";
 import gold from "./assests/gold.svg";
 import bronze from "./assests/bronze.svg";
 import { useEffect, useState } from "react";
-import { getProfilePhotoUrl } from "../../services/UserService";
-import { useInitData } from "@vkruglikov/react-telegram-web-app";
+// import { getProfilePhotoUrl } from "../../services/UserService";
+// import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import i18next from "i18next";
 
 export enum UserLevel {
@@ -55,14 +55,31 @@ interface UserProfileProps {
 function UserProfile({ userLevel, name, userId, secondary }: UserProfileProps) {
   const { icon, text } = statusFromLevel(userLevel);
   const [profilePhoto, setProfilePhoto] = useState(userPic);
-  const [, initData] = useInitData();
+  // const [, initData] = useInitData();
 
   useEffect(() => {
-    getProfilePhotoUrl(initData!, userId).then((url) => {
-      if (url) setProfilePhoto(url);
-    });
+    // getProfilePhotoUrl(initData!, userId).then((url) => {
+    //   if (url) setProfilePhoto(url);
+    // });
+    console.log(userId)
+    const telegram = (window as any).Telegram.WebApp;
+    const user = telegram.initDataUnsafe?.user;
+    if (user) {
+      const { first_name, last_name, username, photo_url } = user;
+    
+      console.log("First Name:", first_name);
+      console.log("Last Name:", last_name);
+      console.log("Username:", username);
+      console.log("Profile Photo URL:", photo_url);
+    
+      // Display the profile photo
+      if (photo_url) {
+        setProfilePhoto(photo_url);
+      } else {
+        console.log("User has no profile photo.");
+      }
+    }    
   }, []);
-
   return (
     <div className="flex h-11 max-w-[100%] flex-row items-center">
       <img

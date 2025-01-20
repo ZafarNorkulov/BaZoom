@@ -1,6 +1,6 @@
 import {
   useInitData,
-  // WebAppProvider,
+  WebAppProvider,
 } from "@vkruglikov/react-telegram-web-app";
 import {
   createBrowserRouter,
@@ -65,7 +65,9 @@ const Main = () => {
 
   return (
     <I18nextProvider i18n={i18next}>
+      <WebAppProvider>
         <RouterProvider router={router}></RouterProvider>
+      </WebAppProvider>
     </I18nextProvider>
   );
 };

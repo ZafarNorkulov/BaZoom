@@ -43,7 +43,6 @@ function MainPage() {
   return (
     <div className="bg-gray-900 flex min-h-screen flex-col">
       {/* Баннер джекпота */}
-
       <div className="flex flex-1 flex-col gap-4 p-4">
         {/* Карточки баланса и джекпота */}
         <div className="grid grid-cols-2 gap-4">
