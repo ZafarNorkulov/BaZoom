@@ -54,7 +54,7 @@ interface UserProfileProps {
 
 function UserProfile({ userLevel, name, userId, secondary }: UserProfileProps) {
   const { icon, text } = statusFromLevel(userLevel);
-  const [profilePhoto, setProfilePhoto] = useState(userPic);
+  const [profilePhoto, setProfilePhoto] = useState<any>(userPic);
   const [, initData] = useInitData();
 
   useEffect(() => {
