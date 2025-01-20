@@ -22,7 +22,7 @@ const BuyingBoost = () => {
         <div className="mt-5 flex gap-3">
           <button className="taxi-gradient relative flex w-1/2 items-center justify-center rounded-xl py-[12.5px] text-xs font-semibold leading-[14px] text-white">
             <div
-              className="absolute right-1 top-1"
+              className="absolute right-1 top-1 cursor-pointer"
               onClick={() => setModalId(1)}
             >
               <img src={questionIcon} alt="" />
@@ -31,7 +31,7 @@ const BuyingBoost = () => {
           </button>
           <div className="border-gradient relative flex w-1/2 items-center justify-center rounded-xl border py-[12.5px]">
             <div
-              className="absolute right-1 top-1"
+              className="absolute right-1 top-1 cursor-pointer"
               onClick={() => setModalId(2)}
             >
               <img src={questionGradient} alt="" />
