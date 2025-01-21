@@ -7,7 +7,9 @@ import questionGray from "../../assets/question-gray.svg"
 
 const Trading = () => {
     const [isActive, setIsActive] = useState(true)
-
+    const [price, setPrice] = useState<number>(0)
+    const [quantity, setQuantity] = useState<number>(0)
+    const [total, setTotal] = useState<number>(0)
     const selectRef = useRef<HTMLSelectElement | null>(null);
 
     // const handleIconClick = () => {
@@ -41,11 +43,11 @@ const Trading = () => {
                 {/* Left content */}
                 <div className="flex flex-col gap-[15px] max-w-[101px]">
                     <div className="flex gap-5 ">
-                        <div className="flex flex-col gap-[10px] items-center w-[40px]">
+                        <div className="flex flex-col gap-[11px] items-center w-[40px]">
                             <span className="text-wrap text-[11px] leading-[14.5px] text-gray text-center w-full h-auto">
                                 Цена <br />(TON)
                             </span>
-                            <div className="flex flex-col items-end gap-[3px] text-xs leading-3 text-red">
+                            <div className="flex flex-col items-end gap-[6px] text-xs leading-3 text-red">
                                 <p>0.0758</p>
                                 <p>0.0756</p>
                                 <p>0.0755</p>
@@ -53,13 +55,13 @@ const Trading = () => {
                                 <p>0.0753</p>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-[10px] items-center w-[41px]">
+                        <div className="flex flex-col gap-[11px] items-center w-[41px]">
                             <span className="text-[11px] leading-[14.5px] text-gray text-right">
                                 Кол-во
                                 <br />
                                 (TAXI)
                             </span>
-                            <div className="flex flex-col items-end gap-[3px] text-xs leading-3 text-red">
+                            <div className="flex flex-col items-end gap-[6px] text-xs leading-3 text-red">
                                 <p>872.2</p>
                                 <p>835.9</p>
                                 <p>80.626</p>
@@ -69,20 +71,20 @@ const Trading = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-1 items-center">
+                    <div className="flex flex-col gap-1 items-center h-[42px]">
                         <span className="text-lg text-green leading-[22px]">0.0751</span>
                         <span className="text-xs leading-[14.5px] text-white">≈ 0.0750 $</span>
                     </div>
 
                     <div className="flex gap-5">
-                        <div className="flex flex-col items-end gap-[3px] text-xs leading-3 text-green">
+                        <div className="flex flex-col items-end gap-[6px] text-xs leading-3 text-green">
                             <p>0.0758</p>
                             <p>0.0756</p>
                             <p>0.0755</p>
                             <p>0.0754</p>
                             <p>0.0753</p>
                         </div>
-                        <div className="flex flex-col items-end gap-[3px] text-xs leading-3 text-green">
+                        <div className="flex flex-col items-end gap-[6px] text-xs leading-3 text-green">
                             <p>0.0758</p>
                             <p>0.0756</p>
                             <p>0.0755</p>
@@ -90,7 +92,7 @@ const Trading = () => {
                             <p>0.0753</p>
                         </div>
                     </div>
-                    <select className=" bg-deepgray h-[30px] text-xs leading-[14.5px] px-[9px] rounded-md focus-visible:outline-none">
+                    <select className=" bg-deepgray h-[30px] text-xs leading-[14.5px] mt-3 px-[9px] rounded-md focus-visible:outline-none">
                         <option value="1" className="">0.0001</option>
                     </select>
 
@@ -108,6 +110,92 @@ const Trading = () => {
                             <option className="w-full bg-deepgray">Лимит</option>
                         </select>
 
+                    </div>
+                    {/* Price Input */}
+                    <div className="bg-deepgray w-full flex items-center justify-between mt-[3px] px-[10px] py-[6px] rounded-md">
+                        <input type="number" value={price} onChange={(e) => setPrice(+e.target.value)} placeholder="Цена (TON)" className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
+                        <div className="flex items-center gap-[15px]">
+                            <button
+                                className="text-2xl font-bold"
+                                onClick={() => setPrice((prev) => (prev > 10 ? prev - 10 : prev))} // -10 qilish
+                            >
+                                -
+                            </button>
+                            <button
+                                className="text-2xl"
+                                onClick={() => setPrice((prev) => prev + 10)} // +10 qilish
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+                    {/* Quantity Input */}
+                    <div className="bg-deepgray w-full flex items-center justify-between mt-[3px] px-[10px] py-[6px] rounded-md">
+                        <input type="number" value={quantity} onChange={(e) => setQuantity(+e.target.value)} placeholder="Кол-во (TAXI)" className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
+                        <div className="flex items-center gap-[15px]">
+                            <button
+                                className="text-2xl font-bold"
+                                onClick={() => setQuantity((prev) => (prev > 10 ? prev - 10 : prev))} // -10 qilish
+                            >
+                                -
+                            </button>
+                            <button
+                                className="text-2xl"
+                                onClick={() => setPrice((prev) => prev + 10)} // +10 qilish
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+                    <div className="flex justify-between mt-1">
+                        <div className="flex flex-col gap-[3px] items-center">
+                            <div className="w-[53px] bg-deepgray rounded-full h-[14px]" />
+                            <span className="text-[10px] leading-3 text-gray">25%</span>
+                        </div>
+                        <div className="flex flex-col gap-[3px] items-center">
+                            <div className="w-[53px] bg-deepgray rounded-full h-[14px]" />
+                            <span className="text-[10px] leading-3 text-gray">50%</span>
+                        </div>
+                        <div className="flex flex-col gap-[3px] items-center">
+                            <div className="w-[53px] bg-deepgray rounded-full h-[14px]" />
+                            <span className="text-[10px] leading-3 text-gray">75%</span>
+                        </div>
+                        <div className="flex flex-col gap-[3px] items-center">
+                            <div className="w-[53px] bg-deepgray rounded-full h-[14px]" />
+                            <span className="text-[10px] leading-3 text-gray">100%</span>
+                        </div>
+
+
+                    </div>
+
+                    {/* Total Input */}
+
+                    <div className="bg-deepgray w-full flex items-center justify-between mt-[15px] px-[10px] py-[6px] rounded-md">
+                        <input type="number" value={total} onChange={(e) => setTotal(+e.target.value)} placeholder="Итого (TON)" className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
+                        <div className="flex items-center gap-[15px]">
+                            <button
+                                className="text-2xl font-bold"
+                                onClick={() => setTotal((prev) => (prev > 10 ? prev - 10 : prev))} // -10 qilish
+                            >
+                                -
+                            </button>
+                            <button
+                                className="text-2xl"
+                                onClick={() => setTotal((prev) => prev + 10)} // +10 qilish
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Balance */}
+                    <div className="flex flex-col gap-1 mt-6">
+
+                        <div className="flex justify-between items-center ">
+                            <span className="text-xs leading-[14.5px] ">Баланс</span>
+                            <span className="text-white text-xs leading-[14.5px] font-medium">0.742504 TON</span>
+                        </div>
+                        <button className={`w-full ${isActive ? "bg-green" : "bg-red"}  text-white py-[13px] leading-5 text-center font-bold rounded-[8px]`}>Купить TAXI</button>
                     </div>
                 </div>
             </div>
