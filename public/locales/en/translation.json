@@ -13,7 +13,7 @@
     },
     "navMenu": {
       "main": "Main",
-      "groups": "Groups",
+      "exchange": "Exchange",
       "wallet": "Wallet",
       "friends": "Friends"
     },
@@ -21,10 +21,9 @@
       "created": "Created",
       "publish": "Publish"
     },
-    "questionModal":{
-      "button":"Ok"
+    "questionModal": {
+      "button": "Ok"
     }
-    
   },
   "pages": {
     "main": {
@@ -115,6 +114,13 @@
       "exchange": "Buy on the exchange",
       "market": "Buy by market",
       "exchangeText": "Fish is a text with a description of what buying on the stock exchange is. Fish-text, fish-text, text, text, text."
+    },
+    "boostMarket": {
+      "choosingToken": "Choosing a token",
+      "buy": "BUY",
+      "confirm": "Confirm",
+      "modalTitle":"Transaction confirmation",
+      "modalText":"When you purchase a $100 TAXI, 0.01 TON will be debited from your wallet in the bot. You will also receive a reward of 100,000 game DICE.Are you confirming the transaction?"
     },
     "telegramRedirect": {
       "title": "Better Experience in Telegram",

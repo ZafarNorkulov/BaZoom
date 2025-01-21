@@ -32,7 +32,7 @@ function NavMenu() {
         <NavMenuIcon
           icon={groupsIcon}
           iconActive={groupsActiveIcon}
-          text={t("components.navMenu.groups")}
+          text={t("components.navMenu.exchange")}
           to={"/groups"}
         />
       </div>

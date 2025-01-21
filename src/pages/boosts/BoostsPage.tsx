@@ -12,7 +12,7 @@ function BoostsBage() {
         header={t("pages.boosts.video.header")}
         description={t("pages.boosts.video.description")}
         price={t("pages.boosts.video.price")}
-        link="/boosts/buy"
+        link="/boosts/videos"
         image={videoImage}
         active
       />
@@ -21,28 +21,28 @@ function BoostsBage() {
         description={t("pages.boosts.voucher.description")}
         price={t("pages.boosts.voucher.price")}
         image={voucherImage}
-        link="/"
+        link="/boosts/buy"
       />
       <BoostItem
         header={t("pages.boosts.holding.1k.header")}
         description={t("pages.boosts.holding.1k.description")}
         price={t("pages.boosts.holding.1k.price")}
         image={taxiIcon}
-        link="/"
+        link="/boosts/buy"
       />
       <BoostItem
         header={t("pages.boosts.holding.5k.header")}
         description={t("pages.boosts.holding.5k.description")}
         price={t("pages.boosts.holding.5k.price")}
         image={taxiIcon}
-        link="/"
+        link="/boosts/buy"
       />
       <BoostItem
         header={t("pages.boosts.holding.10k.header")}
         description={t("pages.boosts.holding.10k.description")}
         price={t("pages.boosts.holding.10k.price")}
         image={taxiIcon}
-        link="/"
+        link="/boosts/buy"
       />
     </div>
   );
