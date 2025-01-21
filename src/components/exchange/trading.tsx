@@ -117,7 +117,7 @@ const Trading = () => {
                         <div className="flex items-center gap-[15px]">
                             <button
                                 className="text-2xl font-bold"
-                                onClick={() => setPrice((prev) => (prev > 10 ? prev - 10 : prev))} // -10 qilish
+                                onClick={() => setPrice((prev) => (prev >= 10 ? prev - 10 : prev))} // -10 qilish
                             >
                                 -
                             </button>
@@ -135,13 +135,13 @@ const Trading = () => {
                         <div className="flex items-center gap-[15px]">
                             <button
                                 className="text-2xl font-bold"
-                                onClick={() => setQuantity((prev) => (prev > 10 ? prev - 10 : prev))} // -10 qilish
+                                onClick={() => setQuantity((prev) => (prev >= 10 ? prev - 10 : prev))} // -10 qilish
                             >
                                 -
                             </button>
                             <button
                                 className="text-2xl"
-                                onClick={() => setPrice((prev) => prev + 10)} // +10 qilish
+                                onClick={() => setQuantity((prev) => prev + 10)} // +10 qilish
                             >
                                 +
                             </button>
