@@ -2,10 +2,7 @@ import ReactECharts from "echarts-for-react";
 
 const ShanghaiIndexChart = () => {
   const options = {
-    title: {
-      text: "Shanghai Index",
-      left: "center",
-    },
+   
     tooltip: {
       trigger: "item",
       axisPointer: {

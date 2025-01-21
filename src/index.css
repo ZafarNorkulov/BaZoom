@@ -16,6 +16,7 @@
 
 html {
   background-color: #1e1e1e;
+  font-family: "Inter", sans-serif;
 }
 
 #root {
@@ -85,4 +86,9 @@ html {
   100% {
     transform: scale(1);
   }
+}
+
+select:focus{
+  outline: none;
+  border-radius: 6px;
 }
