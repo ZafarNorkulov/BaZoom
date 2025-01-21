@@ -33,7 +33,7 @@ function NavMenu() {
           icon={groupsIcon}
           iconActive={groupsActiveIcon}
           text={t("components.navMenu.exchange")}
-          to={"/groups"}
+          to={"/boosts/buy/exchange"}
         />
       </div>
       <div className="absolute left-1/2 top-5 flex min-h-[13vw] min-w-[13vw] -translate-x-1/2 items-center justify-center rounded-full bg-black">
