@@ -31,7 +31,7 @@ function GameStatus() {
 
   if (error) {
     return (
-      <div className="flex h-11 min-w-max flex-col items-end justify-around">
+      <div className="flex h-10 min-w-max flex-col items-end justify-around">
         <p>{t("components.gameStatus.players")}: 0</p>
         <div className="flex flex-row">
           <img src={taxiIcon} className="small-icon-size mr-1.5 rounded-[3px]" />
@@ -42,7 +42,7 @@ function GameStatus() {
   }
 
   return (
-    <div className="flex h-11 min-w-max flex-col items-end justify-around">
+    <div className="flex h-10 min-w-max flex-col items-end justify-around">
       <p>
         {t("components.gameStatus.players")}: {(totalUsers || 0).toLocaleString("de")}
       </p>

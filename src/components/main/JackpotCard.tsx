@@ -8,7 +8,7 @@ interface JackpotCardProps {
 
 function JackpotCard({ won, required }: JackpotCardProps) {
   return (
-    <div className="jackpot-card h-full rounded-2xl bg-[#FFA500] p-4 sm:p-6 shadow-lg"
+    <div className="jackpot-card h-full rounded-2xl bg-[#FFA500] p-[10px] pb-[15px] sm:p-6 shadow-lg"
       style={{ backgroundImage: `url(${jackpotItemBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <h2 className="mb-3 sm:mb-4 text-2xl leading-7 font-semibold text-white">Джекпот</h2>
       <div className="flex flex-col space-y-3 sm:space-y-4">

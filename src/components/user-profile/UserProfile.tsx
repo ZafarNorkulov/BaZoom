@@ -79,10 +79,10 @@ function UserProfile({ userLevel, name, userId, secondary }: UserProfileProps) {
     }
   }, [initDataUnsafe]);
   return (
-    <div className="flex h-11 max-w-[100%] flex-row items-center">
+    <div className="flex h-10 max-w-[100%] flex-row items-center">
       <img
         src={profilePhoto || userPic}
-        className="mr-3 h-[40px] w-[40px] rounded-2xl"
+        className="mr-3 h-10 w-10 rounded-2xl"
       />
       <div className="flex h-full flex-col flex-wrap items-start justify-around pb-1 pt-1">
         <div className="max-h-[15px] max-w-[100%] overflow-x-hidden overflow-y-hidden text-left text-[12px] font-bold text-white">

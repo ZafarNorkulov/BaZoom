@@ -10,10 +10,12 @@ interface BalanceStatusProps {
   diceBalance: number;
 }
 
+
+
 function BalanceStatus({ taxiBalance, virusBalance, diceBalance }: BalanceStatusProps) {
 
   return (
-    <div className="balance-card rounded-2xl bg-[#6A0DAD] p-4 sm:p-6 shadow-lg overflow-hidden"
+    <div className="balance-card rounded-2xl bg-[#6A0DAD] p-[10px] pb-[15px] sm:p-6 shadow-lg overflow-hidden"
       style={{ backgroundImage: `url(${dicesBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <h2 className="mb-3 sm:mb-4 text-2xl leading-7 font-semibold text-white">Баланс</h2>
 
