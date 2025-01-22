@@ -4,7 +4,7 @@ import Trading from "../../../../components/exchange/trading";
 import Orders from "../../../../components/exchange/orders";
 import Grafic from "../../../../components/exchange/grafic";
 
-const BuyBoostExchange = () => {
+const ExchangeVariants = () => {
 
   const [tabs, setTabs] = useState([
     {
@@ -23,7 +23,7 @@ const BuyBoostExchange = () => {
       active: false
     },
   ]);
-console.log(tabs)
+
   const handleTabClick = (id: number) => {
     // Yangilangan massivni yaratamiz
     const updatedTabs = tabs.map((tab) =>
@@ -58,4 +58,4 @@ console.log(tabs)
   </section>;
 };
 
-export default BuyBoostExchange;
+export default ExchangeVariants;

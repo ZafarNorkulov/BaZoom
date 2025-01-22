@@ -1,7 +1,7 @@
 import { useState } from "react"
-import BackPage from "../../../../components/backPage"
-import StarIcon from "../../../../components/icons/star"
-import QuestionModal from "../../../../components/modals/questionModal"
+import BackPage from "../../../components/backPage"
+import StarIcon from "../../../components/icons/star"
+import QuestionModal from "../../../components/modals/questionModal"
 import { useTranslation } from "react-i18next"
 
 

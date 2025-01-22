@@ -12,11 +12,6 @@ const Trading = () => {
     const [total, setTotal] = useState<number>(0)
     const selectRef = useRef<HTMLSelectElement | null>(null);
 
-    // const handleIconClick = () => {
-    //     if (selectRef.current) {
-    //         selectRef.current.click(); // Trigger the opening of the dropdown
-    //     }
-    // };
 
     return (
         <div>

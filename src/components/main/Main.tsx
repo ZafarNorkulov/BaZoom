@@ -23,8 +23,9 @@ import VideosPage from "../../pages/videos/VideosPage";
 import FriendsPage from "../../pages/friends/FriendsPage";
 import { useTranslation } from "react-i18next";
 import BuyingBoost from "../../pages/boosts/buying";
-import BuyBoostMarket from "../../pages/boosts/buying/market";
-import BuyBoostExchange from "../../pages/boosts/buying/exchange";
+import BuyBoostMarket from "../../pages/boosts/market";
+import ExchangeVariants from "../../pages/boosts/exchange/variants";
+import BuyBoostExchange from "../../pages/boosts/exchange";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -37,8 +38,9 @@ const router = createBrowserRouter(
       <Route path="/boosts" element={<BoostsBage />} />
       <Route path="/boosts/videos" element={<VideosPage />} />
       <Route path="/boosts/buy" element={<BuyingBoost />} />
-      <Route path="/boosts/buy/exchange" element={<BuyBoostExchange />} />
-      <Route path="/boosts/buy/market" element={<BuyBoostMarket />} />
+      <Route path="/boosts/exchange" element={<BuyBoostExchange />} />
+      <Route path="/boosts/exchange/variants" element={<ExchangeVariants />} />
+      <Route path="/boosts/market" element={<BuyBoostMarket />} />
     </Route>,
     <Route path="/register" element={<RegisterPage />} />,
   ]),
