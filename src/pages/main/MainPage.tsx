@@ -43,7 +43,7 @@ function MainPage() {
   }, [user]);
 
   return (
-    <div className="bg-gray-900 flex min-h-screen flex-col">
+    <div className="bg-gray-900 flex  flex-col">
       {/* Баннер джекпота */}
       <img src={banner}/>
       <div className="max-container !mt-[7px]">
