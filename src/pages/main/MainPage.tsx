@@ -74,7 +74,7 @@ function MainPage() {
           />
 
           {/* Игровые контролы */}
-          {!user?.id ? <GameControls userId={user?.id} /> : null}
+          {user?.id ? <GameControls userId={user?.id} /> : null}
         </div>
       </div>
     </div>
