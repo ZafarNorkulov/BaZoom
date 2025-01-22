@@ -12,12 +12,12 @@ function BetAmount({ amount, onIncrease, onDecrease, onChangeToken }: BetAmountP
     const [isMultiplierActive, setIsMultiplierActive] = useState(false);
 
     return (
-        <div className="relative mb-4">
-            <div className="flex flex-col space-y-4">
+        <div className="relative">
+            <div className="flex flex-col gap-[7px]">
                 <BetDisplay amount={amount} onChangeToken={onChangeToken} />
 
                 {/* Кнопки управления */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-[7px]">
                     <button
                         onClick={onDecrease}
                         className="rounded-2xl bg-gradient-to-r from-[#ED172B] to-[#931216] py-4 text-3xl font-bold text-white"

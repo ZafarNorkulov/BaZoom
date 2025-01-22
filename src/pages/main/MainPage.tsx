@@ -5,6 +5,7 @@ import BalanceStatus from "../../components/main/BalanceSatatus";
 import GameControls from "../../components/main/GameControls";
 import JackpotCard from "../../components/main/JackpotCard";
 import WinDisplay from "../../components/main/WinDisplay";
+import banner from "../../assets/jackpot-banner.png"
 
 
 function MainPage() {
@@ -44,7 +45,10 @@ function MainPage() {
   return (
     <div className="bg-gray-900 flex min-h-screen flex-col">
       {/* Баннер джекпота */}
-      <div className="flex flex-1 flex-col gap-4 p-4">
+      <img src={banner}/>
+      <div className="max-container !mt-[7px]">
+
+      <div className="flex  flex-col gap-[7px] ">
         {/* Карточки баланса и джекпота */}
         <div className="grid grid-cols-2 gap-4">
           <BalanceStatus
@@ -70,7 +74,8 @@ function MainPage() {
         />
 
         {/* Игровые контролы */}
-        {user?.id ? <GameControls userId={user?.id} /> : null}
+        {!user?.id ? <GameControls userId={user?.id} /> : null}
+      </div>
       </div>
     </div>
   );

@@ -29,12 +29,10 @@ function Header() {
       .then((data) => setGameData(data));
     console.log(gameData);
   }, [userId]);
-
   return (
     <div
       className={
-        "h-13 border-b-thin flex max-w-full flex-row items-center justify-between p-4 text-xs text-gray" +
-        (isSubpage ? " " + "pl-0" : "")
+        `h-13  flex max-w-full flex-row items-center justify-between p-4 text-xs text-gray ${isSubpage ? "pl-0" : ""} ${location.pathname === "/" ? "" : "border-b-thin"}`
       }
     >
       <div className="flex flex-row items-center">

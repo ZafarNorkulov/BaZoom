@@ -23,13 +23,12 @@ function GameControls({ userId, className = '' }: GameControlsProps) {
                 onDecrease={decreaseBet}
                 onChangeToken={() => { }}
             />
-
-            <div className='gap-4 mt-4 flex items-center'>
+            <div className='gap-[7px] mt-[7px] flex items-center'>
                 <BetToggle value={48} type="less" isActive={leftCurrentBet} onClick={() => { setLeftCurrentBet(true); }} />
                 <BetToggle value={52} type="more" isActive={!leftCurrentBet} onClick={() => { setLeftCurrentBet(false); }} />
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-[7px]'>
                 <HistoryButton />
             </div>
         </div>
