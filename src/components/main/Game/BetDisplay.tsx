@@ -23,7 +23,7 @@ function BetDisplay({ amount, onChangeToken }: BetDisplayProps) {
 
     return (
         <>
-            <div className="relative h-[140px] sm:h-[160px] md:h-[180px] lg:h-[200px] rounded-2xl outline outline-1 outline-gray-700">
+            <div className="relative h-[130px] sm:h-[160px] md:h-[180px] lg:h-[200px] rounded-2xl outline outline-1 outline-gray-700">
                 {onChangeToken && (
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -32,12 +32,12 @@ function BetDisplay({ amount, onChangeToken }: BetDisplayProps) {
                         <svg className="h-3 w-3 sm:h-4 sm:w-4 fill-white mr-1 sm:mr-2" viewBox="0 0 24 24">
                             <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
                         </svg>
-                        <span>Изменить токен</span>
+                        <span className='text-[10px] leading-4 text-white'>Изменить токен</span>
                     </button>
                 )}
 
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                    <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white">{amount}</span>
+                    <span className="text-5xl font-bold text-white">{amount}</span>
                     <div className="mt-2 sm:mt-3 md:mt-4 flex flex-col items-center space-y-1 sm:space-y-2">
                         <div className="flex items-center space-x-1 sm:space-x-2">
                             <span className="text-lg sm:text-xl md:text-2xl text-gray-400">Ставка</span>

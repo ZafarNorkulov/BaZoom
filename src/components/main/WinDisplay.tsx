@@ -18,19 +18,19 @@ function WinDisplay({ type, wins }: WinDisplayProps) {
     const title = isWin ? 'Выигрыш' : 'Проигрыш';
 
     return (
-        <div className={`flex items-center justify-between rounded-xl ${bgColor} px-4 py-3`}>
+        <div className={`flex items-center justify-between rounded-xl ${bgColor} px-4 py-[7px]`}>
             <div className="flex items-center gap-2">
-                <img src={walletIcon} alt="Wallet" className="h-7 w-7" />
-                <span className={`font-medium ${textColor}`}>{title}</span>
+                <img src={walletIcon} alt="Wallet" className="h-6 w-6" />
+                <span className={`text-sm leading-5 font-medium ${textColor}`}>{title}</span>
             </div>
 
             <div className="flex items-center gap-3">
                 {wins.map((win, index) => (
                     <div key={index} className="flex items-center gap-1">
-                        <span className={`font-medium ${textColor}`}>
+                        <span className={`font-bold text-sm  ${textColor}`}>
                             {win.amount > 0 ? '+' : ''}{win.amount}
                         </span>
-                        <span className={`font-medium ${textColor}`}>
+                        <span className={`font-bold text-sm  ${textColor}`}>
                             {win.token.symbol}
                         </span>
                     </div>

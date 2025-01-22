@@ -20,13 +20,13 @@ function BetAmount({ amount, onIncrease, onDecrease, onChangeToken }: BetAmountP
                 <div className="grid grid-cols-3 gap-[7px]">
                     <button
                         onClick={onDecrease}
-                        className="rounded-2xl bg-gradient-to-r from-[#ED172B] to-[#931216] py-4 text-3xl font-bold text-white"
+                        className="rounded-xl bg-gradient-to-r h-[48px] from-[#ED172B] to-[#931216]  text-2xl font-bold text-white"
                     >
                         -
                     </button>
                     <button
                         onClick={() => setIsMultiplierActive(!isMultiplierActive)}
-                        className="rounded-2xl bg-[#2A2A2A] py-4 text-3xl font-bold text-white"
+                        className="rounded-xl h-[48px] bg-[#2A2A2A] text-lg text-white"
                         style={{
                             border: isMultiplierActive
                                 ? '2px solid #939393'
@@ -37,7 +37,7 @@ function BetAmount({ amount, onIncrease, onDecrease, onChangeToken }: BetAmountP
                     </button>
                     <button
                         onClick={onIncrease}
-                        className="rounded-2xl bg-gradient-to-r from-[#21CC51] to-[#16E555] py-4 text-3xl font-bold text-white"
+                        className="rounded-xl bg-gradient-to-r from-[#21CC51] to-[#16E555] h-[48px] text-2xl font-bold text-white"
                     >
                         +
                     </button>
