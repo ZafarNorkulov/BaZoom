@@ -75,11 +75,9 @@ function PageLayout() {
   }, [initData]);
 
   const location = useLocation();
-  const hasboost = location.pathname.includes("/boosts/buy");
+  const hasboost = location.pathname.includes("/boosts");
 
-  return isLoading ? (
-    <LoadingScreen progress={loadingProgress} />
-  ) : (
+  return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
       {!hasboost ? <Header /> : null}
       <Outlet />

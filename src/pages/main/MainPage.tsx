@@ -6,6 +6,7 @@ import GameControls from "../../components/main/GameControls";
 import JackpotCard from "../../components/main/JackpotCard";
 import WinDisplay from "../../components/main/WinDisplay";
 
+
 function MainPage() {
   const [initDataUnsafe] = useInitData();
   const user = initDataUnsafe!.user!;
