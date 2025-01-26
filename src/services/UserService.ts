@@ -19,12 +19,13 @@ async function getProfile({
   initData: string;
   userId: number;
 }): Promise<UserProfileContract | null> {
-  const resp = await fetch(`${api}/dice/balance?user_id=${userId}`, {
+  const resp = await fetch(`${api}/dice/balance?user_id=`, {
     method: "GET",
     headers: {
       "Init-Data": initData,
     },
   });
+  console.log(userId)
   if (!resp.ok) return null;
   return await (resp.json() as Promise<UserProfileContract>);
 }
