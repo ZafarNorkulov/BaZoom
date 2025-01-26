@@ -12,22 +12,24 @@ interface UserProfileContract {
   diceBalance?: number;
 }
 
-async function getProfile({
-  initData,
-  userId,
-}: {
-  initData: string;
-  userId: number;
-}): Promise<UserProfileContract | null> {
-  const resp = await fetch(`${api}/dice/balance?user_id=`, {
-    method: "GET",
-    headers: {
-      "Init-Data": initData,
-    },
-  });
-  console.log(userId)
-  if (!resp.ok) return null;
-  return await (resp.json() as Promise<UserProfileContract>);
+async function getProfile(
+  initData: string,
+  userId:number
+): Promise<UserProfileContract | null> {
+  try {
+    const resp = await fetch(`${api}/dice/balance?user_id=${userId}`, {
+      method: "GET",
+      headers: {
+        "Init-Data": initData,
+      },
+    });
+
+    if (!resp.ok) throw new Error(`HTTP error! Status: ${resp?.status}`);
+    return await (resp.json() as Promise<UserProfileContract>);
+  } catch (error) {
+    console.error("Failed to fetch profile:", error);
+    return null;
+  }
 }
 
 async function updateProfile(
