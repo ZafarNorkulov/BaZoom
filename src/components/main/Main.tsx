@@ -64,7 +64,7 @@ const Main = () => {
   useEffect(() => {
     const lang = initDataUnsafe?.user?.language_code;
     if (lang) i18n.changeLanguage(lang);
-    else i18n.changeLanguage("ru");
+    else i18n.changeLanguage("en");
   }, [initDataUnsafe]);
   useEffect(() => {
     const tg = (window as any).Telegram.WebApp;
