@@ -5,7 +5,6 @@ import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import left from "./assets/left.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { api } from "../../services/url";
 
 function Header() {
   const [initDataUnsafe] = useInitData();
