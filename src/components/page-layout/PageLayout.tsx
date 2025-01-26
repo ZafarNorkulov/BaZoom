@@ -55,8 +55,8 @@ function PageLayout() {
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => Math.min(prev + 2, 80));
     }, 125);
-
-    getProfile(initData).then(() => {
+    const userId = initDataUnsafe!.user!.id;
+    getProfile({ initData, userId }).then(() => {
       updateProfile(initData);
 
       // Очищаем интервал

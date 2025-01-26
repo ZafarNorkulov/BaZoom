@@ -9,7 +9,7 @@ import banner from "../../assets/jackpot-banner.png"
 
 
 function MainPage() {
-  const [initDataUnsafe,initData] = useInitData();
+  const [initDataUnsafe, initData] = useInitData();
 
   const user = initDataUnsafe!.user!;
 
@@ -25,7 +25,8 @@ function MainPage() {
 
   const updateGameState = useCallback(async () => {
     if (!initData) return;
-    const profile = await getProfile(initData);
+    const userId = initDataUnsafe!.user!.id;
+    const profile = await getProfile({ initData, userId });
     setBalances({
       taxi: profile?.taxiBalance || 0,
       virus: profile?.virusBalance || 0,

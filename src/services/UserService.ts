@@ -1,4 +1,5 @@
 import { photoToBlob } from "./PhotoService";
+import { api } from "./url";
 // import { api } from "./url";
 
 interface UserProfileContract {
@@ -11,9 +12,14 @@ interface UserProfileContract {
   diceBalance?: number;
 }
 
-
-async function getProfile(initData:string): Promise<UserProfileContract | null> {
-  const resp = await fetch(`/api/dice/balance`, {
+async function getProfile({
+  initData,
+  userId,
+}: {
+  initData: string;
+  userId: number;
+}): Promise<UserProfileContract | null> {
+  const resp = await fetch(`${api}/dice/balance?user_id=${userId}`, {
     method: "GET",
     headers: {
       "Init-Data": initData,
