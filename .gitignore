@@ -24,3 +24,6 @@ dist-ssr
 .anima/*
 
 .DS_Store
+
+# Environments
+.env
