@@ -25,8 +25,7 @@ function MainPage() {
 
   const updateGameState = useCallback(async () => {
     if (!initData) return;
-    const userId = initDataUnsafe!.user!.id;
-    const profile = await getProfile({ initData, userId });
+    const profile = await getProfile(initData);
     setBalances({
       taxi: profile?.taxiBalance || 0,
       virus: profile?.virusBalance || 0,

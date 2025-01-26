@@ -25,7 +25,7 @@ function Header() {
   const userId = user?.id;
   useEffect(() => {
     if (!userId) return;
-    fetch(`${api}/dice/balance?user_id=` + userId)
+    fetch(`/api/dice/balance?user_id=` + userId)
       .then((res) => res.json())
       .then((data) => setGameData(data));
     console.log(gameData);

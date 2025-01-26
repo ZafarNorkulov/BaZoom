@@ -7,7 +7,6 @@ import LoadingScreen from "../loading-screen/LoadingScreen";
 import { getProfile, updateProfile } from "../../services/UserService";
 import taxiIcon from "../../assets/taxi-icon.png";
 import { useTranslation } from "react-i18next";
-import { api } from "../../services/url";
 
 function TelegramRedirect() {
   const { t } = useTranslation();
@@ -59,8 +58,7 @@ function PageLayout() {
     const progressInterval = setInterval(() => {
       setLoadingProgress((prev) => Math.min(prev + 2, 80));
     }, 125);
-    const userId = initDataUnsafe!.user!.id;
-    getProfile({initData, userId}).then(() => {
+    getProfile(initData).then(() => {
       updateProfile(initData);
 
       // Очищаем интервал
@@ -77,7 +75,6 @@ function PageLayout() {
 
   const location = useLocation();
   const hasboost = location.pathname.includes("/boosts");
-  console.log(api)
 
   return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
