@@ -24,15 +24,14 @@ function MainPage() {
   });
 
   const updateGameState = useCallback(async () => {
-    if (!(initData && initDataUnsafe)) return;
-    const userId = initDataUnsafe!.user!.id;
-    const profile = await getProfile( initData, userId );
+    if (!(initData)) return;
+    const profile = await getProfile(initData);
     setBalances({
       taxi: profile?.taxiBalance || 0,
       virus: profile?.virusBalance || 0,
       dice: profile?.diceBalance || 0,
     });
-  }, [initData,initDataUnsafe]);
+  }, [initData]);
 
   useEffect(() => {
     updateGameState();

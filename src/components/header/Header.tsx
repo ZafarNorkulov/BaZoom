@@ -36,6 +36,9 @@ function Header() {
         `h-13  flex max-w-full flex-row items-center justify-between p-[10px] text-xs text-gray ${isSubpage ? "pl-0" : ""} ${location.pathname === "/" ? "" : "border-b-thin"}`
       }
     >
+      <code>
+        {JSON.stringify(user, null, 2)}
+      </code>
       <div className="flex flex-row items-center">
         {isSubpage ? (
           <button

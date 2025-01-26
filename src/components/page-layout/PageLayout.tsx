@@ -46,7 +46,7 @@ function PageLayout() {
   }
 
   useEffect(() => {
-    if (!(initData && initDataUnsafe)) return;
+    if (!(initData)) return;
 
     // Начинаем с 0%
     setLoadingProgress(0);
@@ -55,8 +55,7 @@ function PageLayout() {
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => Math.min(prev + 2, 80));
     }, 125);
-    const userId = initDataUnsafe!.user!.id;
-    getProfile(initData,userId).then(() => {
+    getProfile(initData).then(() => {
       updateProfile(initData);
 
       // Очищаем интервал
@@ -69,7 +68,7 @@ function PageLayout() {
         setLoading(false);
       }, 1000);
     });
-  }, [initData,initDataUnsafe]);
+  }, [initData]);
 
   return isLoading ? (
     <LoadingScreen progress={loadingProgress} />
