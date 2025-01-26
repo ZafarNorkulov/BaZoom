@@ -24,7 +24,7 @@ function MainPage() {
   });
 
   const updateGameState = useCallback(async () => {
-    if (!(initData)) return;
+    if (!initData) return;
     const profile = await getProfile(initData);
     setBalances({
       taxi: profile?.taxiBalance || 0,

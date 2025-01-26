@@ -46,7 +46,7 @@ function PageLayout() {
   }
 
   useEffect(() => {
-    if (!(initData)) return;
+    if (!initData) return;
 
     // Начинаем с 0%
     setLoadingProgress(0);
@@ -55,6 +55,7 @@ function PageLayout() {
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => Math.min(prev + 2, 80));
     }, 125);
+
     getProfile(initData).then(() => {
       updateProfile(initData);
 
