@@ -6,6 +6,7 @@ import bronze from "./assests/bronze.svg";
 import { useEffect, useState } from "react";
 import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import i18next from "i18next";
+import { getProfilePhotoUrl } from "../../services/UserService";
 
 export enum UserLevel {
   Novice,
@@ -47,39 +48,24 @@ function statusFromLevel(level: UserLevel): UserStatus {
 interface UserProfileProps {
   userLevel: UserLevel;
   name: string;
-  userId?: number;
+  userId: number;
   secondary?: boolean;
 }
-type TelegramUser = {
-  id: number;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  photo_url?: string; // photo_url bu yerda optional string sifatida belgilangan
-};
+
 
 function UserProfile({ userLevel, name, userId, secondary }: UserProfileProps) {
   const { icon, text } = statusFromLevel(userLevel);
   const [profilePhoto, setProfilePhoto] = useState<string>(userPic);
-  const [initDataUnsafe] = useInitData();
+  const [, initData] = useInitData();
 
   useEffect(() => {
-    const user = initDataUnsafe?.user as TelegramUser | undefined;
-
-    if (user) {
-      const { photo_url } = user;
-
-      // photo_url qiymati string ekanligini tekshirish
-      if (typeof photo_url === "string" && photo_url.trim() !== "") {
-        setProfilePhoto(photo_url);
-      } else {
-        console.log("Foydalanuvchining profil rasmi yo'q yoki noto'g'ri formatda.");
-      }
-      console.log(userId)
-    }
-  }, [initDataUnsafe]);
+    getProfilePhotoUrl(initData!, userId).then((url) => {
+      if (url) setProfilePhoto(url);
+    });
+  }, []);
   return (
     <div className="flex h-10 max-w-[100%] flex-row items-center">
+      {userId}
       <img
         src={profilePhoto || userPic}
         className="mr-3 h-10 w-10 rounded-2xl"

@@ -5,6 +5,7 @@ import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import left from "./assets/left.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { api } from "../../services/url";
 
 function Header() {
   const [initDataUnsafe] = useInitData();
@@ -24,7 +25,7 @@ function Header() {
   const userId = user?.id;
   useEffect(() => {
     if (!userId) return;
-    fetch("/api/dice/balance?user_id=" + userId)
+    fetch(`${api}/dice/balance?user_id=` + userId)
       .then((res) => res.json())
       .then((data) => setGameData(data));
     console.log(gameData);

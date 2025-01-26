@@ -58,8 +58,8 @@ function PageLayout() {
     const progressInterval = setInterval(() => {
       setLoadingProgress((prev) => Math.min(prev + 2, 80));
     }, 125);
-
-    getProfile(initData).then(() => {
+    const userId = initDataUnsafe!.user!.id;
+    getProfile({initData, userId}).then(() => {
       updateProfile(initData);
 
       // Очищаем интервал
@@ -77,7 +77,7 @@ function PageLayout() {
   const location = useLocation();
   const hasboost = location.pathname.includes("/boosts");
 
-  return isLoading ? (<LoadingScreen progress={loadingProgress}/>):(
+  return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
       {!hasboost ? <Header /> : null}
       <Outlet />
