@@ -1,5 +1,5 @@
 import { photoToBlob } from "./PhotoService";
-import { api } from "./url";
+// import { api } from "./url";
 
 interface UserProfileContract {
   id: number;
@@ -13,7 +13,7 @@ interface UserProfileContract {
 
 
 async function getProfile(initData:string): Promise<UserProfileContract | null> {
-  const resp = await fetch(`${api}/api/dice/balance`, {
+  const resp = await fetch(`/api/dice/balance`, {
     method: "GET",
     headers: {
       "Init-Data": initData,
@@ -26,7 +26,7 @@ async function getProfile(initData:string): Promise<UserProfileContract | null> 
 async function updateProfile(
   initData: string,
 ): Promise<UserProfileContract | null> {
-  const resp = await fetch(`${api}/api/users/profile`, {
+  const resp = await fetch(`/api/users/profile`, {
     method: "POST",
     headers: {
       "Init-Data": initData,
@@ -41,7 +41,7 @@ async function registerUser(initData: string, verificationPhoto: string) {
   const formData = new FormData();
   const blob = photoToBlob(verificationPhoto);
   formData.append("verification_photo", blob);
-  const resp = await fetch(`${api}/api/users/register`, {
+  const resp = await fetch(`/api/users/register`, {
     method: "POST",
     headers: {
       "Init-Data": initData,
@@ -56,7 +56,7 @@ async function getProfilePhotoUrl(
   initData: string,
   userId: number,
 ): Promise<string | null> {
-  const resp = await fetch(`${api}/api/users/profile/photo/${userId}`, {
+  const resp = await fetch(`/api/users/profile/photo/${userId}`, {
     method: "GET",
     headers: {
       "Init-Data": initData,

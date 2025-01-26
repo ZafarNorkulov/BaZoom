@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Header from "../header/Header";
 import NavMenu from "../nav-menu/NavMenu";
 import { useExpand, useInitData } from "@vkruglikov/react-telegram-web-app";
@@ -18,10 +18,7 @@ function TelegramRedirect() {
         {t("pages.telegramRedirect.title", "Better Experience in Telegram")}
       </h1>
       <p className="mb-8 text-gray">
-        {t(
-          "pages.telegramRedirect.description",
-          "This game works best in Telegram. Click below to open in Telegram.",
-        )}
+        {t("pages.telegramRedirect.description", "This game works best in Telegram. Click below to open in Telegram.")}
       </p>
       <a
         href="https://t.me/Holders_Taxi_Bot/game"
@@ -56,8 +53,9 @@ function PageLayout() {
 
     // Анимируем до 80% за 5 секунд
     const progressInterval = setInterval(() => {
-      setLoadingProgress((prev) => Math.min(prev + 2, 80));
+      setLoadingProgress(prev => Math.min(prev + 2, 80));
     }, 125);
+
     getProfile(initData).then(() => {
       updateProfile(initData);
 
@@ -73,12 +71,11 @@ function PageLayout() {
     });
   }, [initData]);
 
-  const location = useLocation();
-  const hasboost = location.pathname.includes("/boosts");
-
-  return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
+  return isLoading ? (
+    <LoadingScreen progress={loadingProgress} />
+  ) : (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
-      {!hasboost ? <Header /> : null}
+      <Header />
       <Outlet />
       <NavMenu />
     </div>
