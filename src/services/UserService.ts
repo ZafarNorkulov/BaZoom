@@ -14,14 +14,15 @@ interface UserProfileContract {
 
 async function getProfile({initData,userId}:
   {initData: string,
-  userId:number}
+  userId?:number}
 ): Promise<UserProfileContract | null> {
-  const resp = await fetch(`${api}/api/dice/balance?user_id=${userId}`, {
+  const resp = await fetch(`${api}/api/dice/balance`, {
     method: "GET",
     headers: {
       "Init-Data": initData,
     },
   });
+  console.log(userId)
   if (!resp.ok) return null;
   return await (resp.json() as Promise<UserProfileContract>);
 }
