@@ -26,6 +26,7 @@ import BuyingBoost from "../../pages/boosts/buying";
 import BuyBoostMarket from "../../pages/boosts/market";
 import ExchangeVariants from "../../pages/boosts/exchange/variants";
 import BuyBoostExchange from "../../pages/boosts/exchange";
+import WaysOfMining from "../../pages/ways-mining";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
       <Route path="/boosts/exchange" element={<BuyBoostExchange />} />
       <Route path="/boosts/exchange/variants" element={<ExchangeVariants />} />
       <Route path="/boosts/market" element={<BuyBoostMarket />} />
+      <Route path="/mining-ways" element={<WaysOfMining />} />
     </Route>,
     <Route path="/register" element={<RegisterPage />} />,
   ]),

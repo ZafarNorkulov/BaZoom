@@ -65,7 +65,6 @@ function UserProfile({ userLevel, name, userId, secondary }: UserProfileProps) {
   }, []);
   return (
     <div className="flex h-10 max-w-[100%] flex-row items-center">
-      {userId}
       <img
         src={profilePhoto || userPic}
         className="mr-3 h-10 w-10 rounded-2xl"

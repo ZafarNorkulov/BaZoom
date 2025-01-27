@@ -23,25 +23,27 @@ function Header() {
 
   const navigate = useNavigate();
   const userId = user?.id;
+
   useEffect(() => {
     if (!userId) return;
-    fetch(`${api}/dice/balance?user_id=${userId}`)
+    fetch(`${api}/dice/balance?authorization=${userId}`, {
+      method: "GET",
+    
+    })
       .then((res) => res.json())
       .then((data) => setGameData(data));
-    console.log(gameData);
-    
-  }, [userId]);
 
- 
+  }, [userId]);
+  console.log(gameData);
+
+
   return (
     <div
       className={
         `h-13  flex max-w-full flex-row items-center justify-between p-[10px] text-xs text-gray ${isSubpage ? "pl-0" : ""} ${location.pathname === "/" ? "" : "border-b-thin"}`
       }
     >
-      <code>
-        {JSON.stringify(initDataUnsafe, null, 2)}
-      </code>
+
       <div className="flex flex-row items-center">
         {isSubpage ? (
           <button
