@@ -20,7 +20,6 @@ function Header() {
   }, [location]);
 
   const [gameData, setGameData] = useState<any>(null);
-  const [datas,setDatas] = useState()
 
   const navigate = useNavigate();
   const userId = user?.id;
@@ -32,10 +31,7 @@ function Header() {
     console.log(gameData);
     
   }, [userId]);
-  useEffect(() => {
-  const tg = (window as any).Telegram.WebApp.initData;
-  setDatas(tg)  
-  },[])
+
  
   return (
     <div
@@ -44,8 +40,7 @@ function Header() {
       }
     >
       <code>
-        {JSON.stringify(user, null, 2)}
-        {JSON.stringify(datas, null, 2)}
+        {JSON.stringify(initDataUnsafe, null, 2)}
       </code>
       <div className="flex flex-row items-center">
         {isSubpage ? (
