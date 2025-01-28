@@ -94,13 +94,13 @@
       "holding": {
         "buy": {
           "header": "Купить $TAXI",
-          "description": "Купить $TAXI",
+          "description": "Купить минимум 10 $TAXI за 0,0875 $TON",
           "price": "500K",
           "sub":"Всего"
         },
         "sell": {
           "header": "Продать $TAXI",
-          "description": "Продать $TAXI",
+          "description": "Продайте ваши $TAXI по цене 0,00875 $TON за 1 $TAXI",
           "price": "-35K",
           "sub": "Мои"
         }

@@ -94,15 +94,15 @@
       "holding": {
         "buy": {
           "header": "Buy $TAXI",
-          "description": "Buy $TAXI",
+          "description": "Buy a minimum of 10 $TAXI for 0.0875 $TON",
           "price": "500K",
-          "sub":"Total"
+          "sub": "Total"
         },
         "sell": {
           "header": "Sell $TAXI",
-          "description": "Sell $TAXI",
+          "description": "Sell your $TAXI at the price of 0.00875 $TON per 1 $TAXI",
           "price": "-35K",
-          "sub":"My"
+          "sub": "My"
         }
       },
       "mining": {
