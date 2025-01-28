@@ -81,7 +81,7 @@ function BoostsBage() {
                   description={t("pages.boosts.holding.buy.description")}
                   price={t("pages.boosts.holding.buy.price")}
                   image={taxitaxi}
-                  link="/mining-ways"
+                  link="/boosts/buy"
                 />
                 <BoostItem
                   header={t("pages.boosts.holding.sell.header")}
