@@ -81,35 +81,35 @@
       "video": {
         "header": "Publish a video of the token mining process",
         "description": "Videos are created automatically daily. To create a video, you need to mine tokens at least 10 times!",
-        "price": "10K per photo",
+        "price": "1K/photo",
         "publication": "Publication",
         "comment": "Comment"
       },
       "voucher": {
         "header": "Buy and hold a voucher from premarket",
         "description": "Buy and hold a voucher from premarket",
-        "price": "5K"
+        "price": "5K/day"
       },
       "holding": {
-        "1k": {
-          "header": "Place an order to buy 100 $TAXI",
-          "description": "Place an order to buy 100 $TAXI",
-          "price": "5K"
-        },
-        "5k": {
-          "header": "Place an order to sell 100 $TAXI",
-          "description": "Place an order to sell 100 $TAXI",
-          "price": "5K"
-        },
-        "10k": {
+        "buy": {
           "header": "Buy $TAXI",
           "description": "Buy $TAXI",
-          "price": "5K"
+          "price": "500K"
+        },
+        "sell": {
+          "header": "Sell $TAXI",
+          "description": "Sell $TAXI",
+          "price": "-35K"
         }
       },
-      "tabs":{
-        "daily":"Daily",
-        "reusable":"Reusable"
+      "mining": {
+        "header": "Mining $DICE",
+        "description": "Mining $DICE",
+        "price": "1K/photo"
+      },
+      "tabs": {
+        "daily": "Daily",
+        "reusable": "Reusable"
       }
     },
     "buyingBoost": {
@@ -123,8 +123,8 @@
       "choosingToken": "Choosing a token",
       "buy": "BUY",
       "confirm": "Confirm",
-      "modalTitle":"Transaction confirmation",
-      "modalText":"When you purchase a $100 TAXI, 0.01 TON will be debited from your wallet in the bot. You will also receive a reward of 100,000 game DICE.Are you confirming the transaction?"
+      "modalTitle": "Transaction confirmation",
+      "modalText": "When you purchase a $100 TAXI, 0.01 TON will be debited from your wallet in the bot. You will also receive a reward of 100,000 game DICE.Are you confirming the transaction?"
     },
     "telegramRedirect": {
       "title": "Better Experience in Telegram",

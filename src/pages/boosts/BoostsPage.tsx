@@ -2,8 +2,9 @@ import { useTranslation } from "react-i18next";
 import BoostItem from "./BoostItem";
 import videoImage from "./assets/sticker.gif";
 import voucherImage from "./assets/voucher.png";
-import taxiIcon from "../../assets/taxitaxi.jpeg";
+import taxitaxi from "../../assets/taxitaxi.jpeg";
 import { useState } from "react";
+import taxiIcon from "../../assets/taxi-icon.png"
 
 function BoostsBage() {
   const { t } = useTranslation();
@@ -33,43 +34,45 @@ function BoostsBage() {
             isDaily ? (
               <>
                 <BoostItem
-                  header={t("pages.boosts.video.header")}
-                  description={t("pages.boosts.video.description")}
-                  price={t("pages.boosts.video.price")}
+                  header={t("pages.boosts.mining.header")}
+                  description={t("pages.boosts.mining.description")}
+                  price={t("pages.boosts.mining.price")}
                   link="/mining-ways"
-                  image={videoImage}
+                  image={taxiIcon}
                   active
                 />
                 <BoostItem
+                  header={t("pages.boosts.video.header")}
+                  description={t("pages.boosts.video.description")}
+                  price={t("pages.boosts.video.price")}
+                  link="/boosts/videos"
+                  image={videoImage}
+                  active
+                />
+              
+              </>
+            ) : (
+              <>
+               
+                <BoostItem
+                  header={t("pages.boosts.holding.buy.header")}
+                  description={t("pages.boosts.holding.buy.description")}
+                  price={t("pages.boosts.holding.buy.price")}
+                  image={taxitaxi}
+                  link="/mining-ways"
+                />
+                <BoostItem
+                  header={t("pages.boosts.holding.sell.header")}
+                  description={t("pages.boosts.holding.sell.description")}
+                  price={t("pages.boosts.holding.sell.price")}
+                  image={taxitaxi}
+                  link="/boosts/buy"
+                />
+                  <BoostItem
                   header={t("pages.boosts.voucher.header")}
                   description={t("pages.boosts.voucher.description")}
                   price={t("pages.boosts.voucher.price")}
                   image={voucherImage}
-                  link="/mining-ways"
-                  active
-                />
-              </>
-            ) : (
-              <>
-                <BoostItem
-                  header={t("pages.boosts.holding.1k.header")}
-                  description={t("pages.boosts.holding.1k.description")}
-                  price={t("pages.boosts.holding.1k.price")}
-                  image={taxiIcon}
-                  link="/boosts/buy"
-                />
-                <BoostItem
-                  header={t("pages.boosts.holding.5k.header")}
-                  description={t("pages.boosts.holding.5k.description")}
-                  price={t("pages.boosts.holding.5k.price")}
-                  image={taxiIcon}
-                  link="/boosts/buy"
-                />
-                <BoostItem
-                  header={t("pages.boosts.holding.10k.header")}
-                  description={t("pages.boosts.holding.10k.description")}
-                  price={t("pages.boosts.holding.10k.price")}
-                  image={taxiIcon}
                   link="/boosts/buy"
                 />
               </>
