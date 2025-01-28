@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Divider from "../../components/divider"
 import camera from "./assets/camera.svg"
 import forbidden from "./assets/forbidden-svgrepo-com 1.svg"
+import { useNavigate } from "react-router-dom";
 
 const WaysOfMining = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const navigate = useNavigate()
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedOption(event.target.value)
     };
+    useEffect(() => {
+        if (selectedOption === "1") {
+            navigate("/mining-ways/face-detector")
+        } else if (selectedOption === "2") {
+            navigate("/mining-ways/back-detector")
+        }
+    }, [selectedOption])
 
 
     return (
