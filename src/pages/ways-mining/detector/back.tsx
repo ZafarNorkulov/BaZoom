@@ -1,9 +1,12 @@
+import FaceDetector from "../../../components/face-detector/FaceDetector"
 
 const BackDetectorPage = () => {
   return (
-    <div>
-      
-    </div>
+    <section>
+      <div className="max-container">
+        <FaceDetector cameraType="back" />
+      </div>
+    </section>
   )
 }
 

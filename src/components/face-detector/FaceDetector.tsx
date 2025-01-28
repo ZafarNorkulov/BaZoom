@@ -78,12 +78,14 @@ interface FaceDetectorProps {
   tryProcessFaceData?: (data: string) => Promise<boolean>;
   textForState?: (state: IdentificationState) => string;
   externalStream?: MediaStream;
+  cameraType?: "front" | "back"; // Yangi prop - kamera turi
 }
 
 const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState,
   externalStream,
+  cameraType = "front", // Default qiymati "front"
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -103,19 +105,22 @@ const FaceDetector = memo(function FaceDetector({
     await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
   }
 
-  // async function startCamera() {
-  //   navigator.mediaDevices;
-  //   const stream = await navigator.mediaDevices.getUserMedia({
-  //     video: {
-  //       width: { ideal: VIDEO_RESOLUTION_WIDTH },
-  //       height: { ideal: VIDEO_RESOLUTION_HEIGHT },
-  //     },
-  //   });
-  //
-  //   videoRef.current!.srcObject = stream;
-  //
-  //   return stream;
-  // }
+  // Kamera ishga tushirish
+  async function startCamera() {
+    const constraints: MediaStreamConstraints = {
+      video: {
+        facingMode: cameraType, // "front" yoki "environment" (orqa kamera)
+        width: { ideal: VIDEO_RESOLUTION_WIDTH },
+        height: { ideal: VIDEO_RESOLUTION_HEIGHT },
+      },
+    };
+
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+    videoRef.current!.srcObject = stream;
+    setInitiallzing(false);
+    setPlaying(true);
+  }
 
   // Initialize page
   useEffect(() => {
@@ -124,8 +129,10 @@ const FaceDetector = memo(function FaceDetector({
       videoRef.current!.srcObject = externalStream;
       setInitiallzing(false);
       return;
+    } else {
+      startCamera(); // Agar tashqi oqim bo'lmasa, kamera ishga tushadi
     }
-  }, []);
+  }, [cameraType]);
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");
@@ -155,7 +162,6 @@ const FaceDetector = memo(function FaceDetector({
     );
   }, []);
 
-  // Interval For face detection
   useEffect(() => {
     const isFaceRecognitionNeeded =
       isPlaying && identificationState === IdentificationState.POSITIONING;
@@ -169,7 +175,6 @@ const FaceDetector = memo(function FaceDetector({
 
       if (detection) {
         if (isFaceInTheCenter(detection)) {
-          // Emulate requests
           setIdentificationState(IdentificationState.PENDING);
           onFaceDetect();
         }
@@ -204,13 +209,20 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        <div
-          style={{
-            background: overlayBackgroundFromState(identificationState),
-            opacity: isInitializing ? 0 : 1,
-          }}
-          className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
-        ></div>
+        {
+          cameraType === "front" ? (
+
+            <div
+              style={{
+                background: overlayBackgroundFromState(identificationState),
+                opacity: isInitializing ? 0 : 1,
+              }}
+              className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
+            ></div>
+          ) : (
+            ""
+          )
+        }
         <div
           style={{
             opacity:
