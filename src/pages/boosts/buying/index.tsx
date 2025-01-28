@@ -52,14 +52,14 @@ const BuyingBoost = () => {
         setOpen={() => toggleModal(null)}
         title={t("pages.buyingBoost.exchange")}
         text={t("pages.buyingBoost.exchangeText")}
-        url="/boosts/buy/exchange"
+        url="/boosts/exchange"
       />
       <QuestionModal
         open={modalId === 2}
         setOpen={() => toggleModal(null)}
         title={t("pages.buyingBoost.market")}
         text={t("pages.buyingBoost.exchangeText")}
-        url="/boosts/buy/market"
+        url="/boosts/market"
       />
     </section>
   );

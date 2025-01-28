@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import NavMenu from "../nav-menu/NavMenu";
 import { useExpand, useInitData } from "@vkruglikov/react-telegram-web-app";
@@ -70,12 +70,13 @@ function PageLayout() {
       }, 1000);
     });
   }, [initData]);
+  const location = useLocation();
+  const hasboost = location.pathname.includes("/boosts")
+  console.log(hasboost)
 
-  return isLoading ? (
-    <LoadingScreen progress={loadingProgress} />
-  ) : (
+  return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
-      <Header />
+      {!hasboost ? <Header /> : null}
       <Outlet />
       <NavMenu />
     </div>

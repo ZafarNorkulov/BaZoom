@@ -5,14 +5,18 @@ import voucherImage from "./assets/voucher.png";
 import taxitaxi from "../../assets/taxitaxi.jpeg";
 import { useState } from "react";
 import taxiIcon from "../../assets/taxi-icon.png"
+import onChain from "./assets/onChain.png"
+import support from "./assets/support-project.png"
+import BackPage from "../../components/backPage";
 
 function BoostsBage() {
   const { t } = useTranslation();
   const [isDaily, setIsDaily] = useState<boolean>(true)
   return (
-    <div className="mt-[30px]">
+    <div >
+      <BackPage title="Задания" />
       <div className="max-container">
-        <div className="w-full bg-deepgray rounded-2xl p-1 relative flex">
+        <div className="w-full bg-deepgray rounded-2xl p-1 relative flex mt-[30px]">
           <button
             className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${isDaily ? 'text-white' : 'text-gray'}`}
             onClick={() => setIsDaily(true)}
@@ -49,11 +53,29 @@ function BoostsBage() {
                   image={videoImage}
                   active
                 />
-              
+                <BoostItem
+                  header={t("pages.boosts.onchain.header")}
+                  description={t("pages.boosts.onchain.description")}
+                  price={t("pages.boosts.onchain.price")}
+                  link="/boosts/videos"
+                  image={onChain}
+                  button={t("pages.boosts.perform")}
+                  active
+                />
+                <BoostItem
+                  header={t("pages.boosts.support.header")}
+                  description={t("pages.boosts.support.description")}
+                  price={t("pages.boosts.support.price")}
+                  link="/boosts/videos"
+                  image={support}
+                  button={t("pages.boosts.perform")}
+                  active
+                />
+
               </>
             ) : (
               <>
-               
+
                 <BoostItem
                   header={t("pages.boosts.holding.buy.header")}
                   description={t("pages.boosts.holding.buy.description")}
@@ -68,7 +90,7 @@ function BoostsBage() {
                   image={taxitaxi}
                   link="/boosts/buy"
                 />
-                  <BoostItem
+                <BoostItem
                   header={t("pages.boosts.voucher.header")}
                   description={t("pages.boosts.voucher.description")}
                   price={t("pages.boosts.voucher.price")}

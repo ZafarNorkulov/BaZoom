@@ -78,6 +78,7 @@
     },
     "boosts": {
       "goto": "Go",
+      "perform": "To perform",
       "video": {
         "header": "Publish a video of the token mining process",
         "description": "Videos are created automatically daily. To create a video, you need to mine tokens at least 10 times!",
@@ -106,6 +107,16 @@
         "header": "Mining $DICE",
         "description": "Mining $DICE",
         "price": "1K/photo"
+      },
+      "onchain": {
+        "header": "Daily On-Chain & Check-In",
+        "description": "A little support",
+        "price": "62,5K"
+      },
+      "support": {
+        "header": "Support project",
+        "description": "A little support",
+        "price": "10K"
       },
       "tabs": {
         "daily": "Daily",

@@ -10,6 +10,7 @@ interface BoostItemProps {
   link: string;
   active?: boolean;
   image?: string;
+  button?: string
 }
 function BoostItem({
   header,
@@ -18,6 +19,7 @@ function BoostItem({
   link,
   active,
   image,
+  button,
 }: BoostItemProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -45,7 +47,7 @@ function BoostItem({
               {price}
             </div>
             <OptionalButton
-              text={t("pages.boosts.goto")}
+              text={button || t("pages.boosts.goto")}
               onClick={() => navigate(link)}
               active={active}
               className="h-[24px] pb-[4px] pl-[12px] pr-[12px] pt-[4px] text-xs font-normal"
