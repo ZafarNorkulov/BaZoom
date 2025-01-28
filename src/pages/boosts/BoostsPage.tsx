@@ -8,6 +8,7 @@ import taxiIcon from "../../assets/taxi-icon.png"
 import onChain from "./assets/onChain.png"
 import support from "./assets/support-project.png"
 import BackPage from "../../components/backPage";
+import option from "./assets/option.svg"
 
 function BoostsBage() {
   const { t } = useTranslation();
@@ -78,6 +79,10 @@ function BoostsBage() {
 
                 <BoostItem
                   header={t("pages.boosts.holding.buy.header")}
+                  sub={<div className="flex items-center gap-1">
+                    <p className="text-[10px] leading-4 ">{t("pages.boosts.holding.buy.sub")}: 1.1M</p>
+                    <img className="w-3 h-3 rounded-sm" src={taxitaxi} alt="" />
+                  </div>}
                   description={t("pages.boosts.holding.buy.description")}
                   price={t("pages.boosts.holding.buy.price")}
                   image={taxitaxi}
@@ -85,6 +90,11 @@ function BoostsBage() {
                 />
                 <BoostItem
                   header={t("pages.boosts.holding.sell.header")}
+                  sub={<div className="flex items-center gap-1">
+                    <p className="text-[10px] leading-4 ">{t("pages.boosts.holding.sell.sub")}: 100.1K</p>
+                    <img className="w-3 h-3 rounded-sm" src={taxitaxi} alt="" />
+                    <img className="w-3 h-3 rounded-sm" src={option} alt="" />
+                  </div>}
                   description={t("pages.boosts.holding.sell.description")}
                   price={t("pages.boosts.holding.sell.price")}
                   image={taxitaxi}

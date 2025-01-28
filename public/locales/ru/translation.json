@@ -95,12 +95,14 @@
         "buy": {
           "header": "Купить $TAXI",
           "description": "Купить $TAXI",
-          "price": "500K"
+          "price": "500K",
+          "sub":"Всего"
         },
         "sell": {
           "header": "Продать $TAXI",
           "description": "Продать $TAXI",
-          "price": "-35K"
+          "price": "-35K",
+          "sub": "Мои"
         }
       },
       "mining": {

@@ -72,7 +72,6 @@ function PageLayout() {
   }, [initData]);
   const location = useLocation();
   const hasboost = location.pathname.includes("/boosts")
-  console.log(hasboost)
 
   return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
     <div className="w-screen overflow-y-scroll scroll-smooth pb-[24vw] font-sans text-gray">
