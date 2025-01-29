@@ -3,16 +3,18 @@ import BoostItem from "./BoostItem";
 import videoImage from "./assets/sticker.gif";
 import voucherImage from "./assets/voucher.png";
 import taxitaxi from "../../assets/taxitaxi.jpeg";
-import { useState } from "react";
 import taxiIcon from "../../assets/taxi-icon.png"
 import onChain from "./assets/onChain.png"
 import support from "./assets/support-project.png"
 import BackPage from "../../components/backPage";
 import option from "./assets/option.svg"
+import { useSearchParams } from "react-router-dom";
 
 function BoostsBage() {
   const { t } = useTranslation();
-  const [isDaily, setIsDaily] = useState<boolean>(true)
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isDaily = searchParams.get("isDaily") === "true";
   return (
     <div >
       <BackPage title="Задания" />
@@ -20,18 +22,19 @@ function BoostsBage() {
         <div className="w-full bg-deepgray rounded-2xl p-1 relative flex mt-[30px]">
           <button
             className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${isDaily ? 'text-white' : 'text-gray'}`}
-            onClick={() => setIsDaily(true)}
+            onClick={() => setSearchParams({ isDaily: "true" })}
           >
             {t("pages.boosts.tabs.daily")}
           </button>
           <button
             className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${!isDaily ? 'text-white' : 'text-gray'}`}
-            onClick={() => setIsDaily(false)}
+            onClick={() => setSearchParams({ isDaily: "false" })}
           >
             {t("pages.boosts.tabs.reusable")}
           </button>
           <div
-            className={`absolute top-1 bottom-1 rounded-2xl z-10 taxi-gradient w-1/2 transition-all duration-300 ease-in ${isDaily ? 'left-1' : 'left-1/2'}`}
+            className={`absolute top-1 bottom-1 rounded-2xl z-10 taxi-gradient w-1/2 transition-all duration-300 ease-in `}
+            style={{ left: isDaily ? "4px" : "50%" }}
           ></div>
         </div>
         <div className="flex h-max w-full flex-col gap-4 mt-5">

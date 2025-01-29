@@ -26,9 +26,8 @@ function Header() {
 
   useEffect(() => {
     if (!userId) return;
-    fetch(`${api}/dice/balance?authorization=${userId}`, {
+    fetch(`${api}/dice/balance?user_id=${userId}`, {
       method: "GET",
-    
     })
       .then((res) => res.json())
       .then((data) => setGameData(data));

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import HistoryButton from './Game/HistoryButton';
 import BetAmount from './Game/BetAmount';
 import BetToggle from './Game/BetToggle';
+import { Link } from 'react-router-dom';
 
 interface GameControlsProps {
     userId: number;
@@ -28,9 +29,9 @@ function GameControls({ userId, className = '' }: GameControlsProps) {
                 <BetToggle value={52} type="more" isActive={!leftCurrentBet} onClick={() => { setLeftCurrentBet(false); }} />
             </div>
 
-            <div className='mt-[7px]'>
+            <Link to="/history" className='block mt-[7px]'>
                 <HistoryButton />
-            </div>
+            </Link>
         </div>
     );
 }

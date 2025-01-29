@@ -29,11 +29,13 @@ import BuyBoostExchange from "../../pages/boosts/exchange";
 import WaysOfMining from "../../pages/ways-mining";
 import FaceDetectorPage from "../../pages/ways-mining/detector/face";
 import BackDetectorPage from "../../pages/ways-mining/detector/back";
+import History from "../../pages/history";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<PageLayout />}>
       <Route path="/" element={<MainPage />} />
+      <Route path="/history" element={<History />} />
       <Route path="/groups" element={<WorkInProgressPage />} />
       <Route path="/wallet" element={<WorkInProgressPage />} />
       <Route path="/friends" element={<FriendsPage />} />
