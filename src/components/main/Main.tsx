@@ -30,6 +30,7 @@ import WaysOfMining from "../../pages/ways-mining";
 import FaceDetectorPage from "../../pages/ways-mining/detector/face";
 import BackDetectorPage from "../../pages/ways-mining/detector/back";
 import History from "../../pages/history";
+import StoreProvider from "../store-provider/StoreProvider";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -82,7 +83,9 @@ const Main = () => {
   return (
     <I18nextProvider i18n={i18next}>
       <WebAppProvider>
+      <StoreProvider>
         <RouterProvider router={router}></RouterProvider>
+        </StoreProvider>
       </WebAppProvider>
     </I18nextProvider>
   );

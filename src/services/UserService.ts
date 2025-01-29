@@ -5,6 +5,7 @@ interface UserProfileContract {
   name: string;
   balance: number;
   profile_photo_url?: string;
+  has_verification_photo: boolean;
   virusBalance?: number;
   taxiBalance?: number;
   diceBalance?: number;
@@ -22,7 +23,6 @@ async function getProfile(
   if (!resp.ok) return null;
   return await (resp.json() as Promise<UserProfileContract>);
 }
-
 
 async function updateProfile(
   initData: string,

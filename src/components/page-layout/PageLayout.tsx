@@ -7,6 +7,7 @@ import LoadingScreen from "../loading-screen/LoadingScreen";
 import { getProfile, updateProfile } from "../../services/UserService";
 import taxiIcon from "../../assets/taxi-icon.png";
 import { useTranslation } from "react-i18next";
+import CameraProvider from "../camera-provider/CameraProvider";
 
 function TelegramRedirect() {
   const { t } = useTranslation();
@@ -41,9 +42,9 @@ function PageLayout() {
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   // Если нет данных Telegram, показываем страницу перенаправления
-  if (!initData && !initDataUnsafe?.user) {
-    return <TelegramRedirect />;
-  }
+  // if (!initData && !initDataUnsafe?.user) {
+  //   return <TelegramRedirect />;
+  // }
 
   useEffect(() => {
     if (!initData) return;
@@ -73,8 +74,10 @@ function PageLayout() {
   const location = useLocation();
   const hasboost = location.pathname.includes("/boosts") || location.pathname.includes("/history");
 
-  return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
+  return  (
     <div className="w-screen overflow-y-scroll overflow-x-hidden scroll-smooth pb-[24vw] font-sans text-gray">
+      
+        
       {!hasboost ? <Header /> : null}
       <Outlet />
       <NavMenu />

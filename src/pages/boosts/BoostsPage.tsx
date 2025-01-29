@@ -21,25 +21,25 @@ function BoostsBage() {
       <div className="max-container">
         <div className="w-full bg-deepgray rounded-2xl p-1 relative flex mt-[30px]">
           <button
-            className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${isDaily ? 'text-white' : 'text-gray'}`}
-            onClick={() => setSearchParams({ isDaily: "true" })}
+            className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${!isDaily ? 'text-white' : 'text-gray'}`}
+            onClick={() => setSearchParams({ isDaily: "false" })}
           >
             {t("pages.boosts.tabs.daily")}
           </button>
           <button
-            className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${!isDaily ? 'text-white' : 'text-gray'}`}
-            onClick={() => setSearchParams({ isDaily: "false" })}
+            className={`w-1/2 h-[31px] p-2 leading-[14.5px] text-xs font-bold transition-colors z-20 duration-300 ${isDaily ? 'text-white' : 'text-gray'}`}
+            onClick={() => setSearchParams({ isDaily: "true" })}
           >
             {t("pages.boosts.tabs.reusable")}
           </button>
           <div
             className={`absolute top-1 bottom-1 rounded-2xl z-10 taxi-gradient w-1/2 transition-all duration-300 ease-in `}
-            style={{ left: isDaily ? "4px" : "50%" }}
+            style={{ left: !isDaily ? "4px" : "50%" }}
           ></div>
         </div>
         <div className="flex h-max w-full flex-col gap-4 mt-5">
           {
-            isDaily ? (
+            !isDaily ? (
               <>
                 <BoostItem
                   header={t("pages.boosts.mining.header")}

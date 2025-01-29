@@ -54,4 +54,15 @@ async function submitPhoto(photo: string, initData: string): Promise<boolean> {
   return result.success;
 }
 
-export { submitPhoto, photoToBlob };
+async function getPhotoCountForUser(initData: string): Promise<number> {
+  const resp = await fetch("/api/photos/count", {
+    headers: {
+      "Init-Data": initData,
+    },
+  });
+  if (!resp.ok) return 0;
+  const result = await resp.json();
+  return result;
+}
+
+export { submitPhoto, photoToBlob, getPhotoCountForUser };
