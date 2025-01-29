@@ -45,7 +45,7 @@ function MainPage() {
   return (
     <div className="bg-gray-900 flex  flex-col">
       {/* Баннер джекпота */}
-      <img src={banner} />
+      <img src={banner} className="pc:h-[70px] h-[80px]" />
       <div className="max-container !mt-[7px]">
 
         <div className="flex  flex-col gap-[7px] ">

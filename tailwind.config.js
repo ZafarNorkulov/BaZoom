@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      transparent:{
+      transparent: {
         DEFAULT: "transparent",
       },
       black: {
@@ -42,7 +42,6 @@ export default {
       green: {
         DEFAULT: "#32D058",
       },
-      
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
@@ -51,6 +50,7 @@ export default {
       screens: {
         "mobile-s": { max: "360px" },
         short: { raw: "(max-height: 770px)" },
+        pc: { raw: "(min-height:500px) and (max-height: 640px)" },
       },
     },
   },

@@ -18,6 +18,7 @@ function GameControls({ userId, className = '' }: GameControlsProps) {
     console.log(userId)
     return (
         <div className={` ${className}`}>
+
             <BetAmount
                 amount={betAmount}
                 onIncrease={increaseBet}

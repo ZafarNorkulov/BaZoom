@@ -39,7 +39,7 @@ function Header() {
   return (
     <div
       className={
-        `h-13  flex max-w-full flex-row items-center justify-between p-[10px] text-xs text-gray ${isSubpage ? "pl-0" : ""} ${location.pathname === "/" ? "" : "border-b-thin"}`
+        `h-13 pc:h-12  flex max-w-full flex-row items-center justify-between p-[10px] text-xs text-gray ${isSubpage ? "pl-0" : ""} ${location.pathname === "/" ? "" : "border-b-thin"}`
       }
     >
 
