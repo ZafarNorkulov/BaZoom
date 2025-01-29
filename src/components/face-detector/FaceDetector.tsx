@@ -78,12 +78,14 @@ interface FaceDetectorProps {
   tryProcessFaceData?: (data: string) => Promise<boolean>;
   textForState?: (state: IdentificationState) => string;
   externalStream?: MediaStream;
+  cameraFacing?: "user" | "environment";
 }
 
 const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState,
   externalStream,
+  cameraFacing
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -104,10 +106,10 @@ const FaceDetector = memo(function FaceDetector({
   }
 
   // Kamera ishga tushirish
-  async function startCamera() {
+  async function startCamera(cameraFacing: "user" | "environment" = "user") {
     const constraints: MediaStreamConstraints = {
       video: {
-        facingMode: "user", // Front kamera
+        facingMode: { ideal: cameraFacing },
         width: { ideal: VIDEO_RESOLUTION_WIDTH },
         height: { ideal: VIDEO_RESOLUTION_HEIGHT },
       },
@@ -128,9 +130,9 @@ const FaceDetector = memo(function FaceDetector({
       setInitiallzing(false);
       return;
     } else {
-      startCamera(); // Kamera ishga tushadi
+      startCamera(cameraFacing); // Kamera ishga tushadi
     }
-  }, []);
+  }, [cameraFacing]);
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");
@@ -207,13 +209,13 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        <div
+       {cameraFacing === "user" && <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
           }}
           className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
-        ></div>
+        ></div>}
         <div
           style={{
             opacity:
