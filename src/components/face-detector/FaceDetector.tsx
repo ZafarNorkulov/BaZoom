@@ -85,7 +85,7 @@ const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState,
   externalStream,
-  cameraFacing="user"
+  cameraFacing = "user"
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -210,7 +210,7 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-       {cameraFacing === "user" && <div
+        {cameraFacing === "user" && <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
@@ -227,13 +227,14 @@ const FaceDetector = memo(function FaceDetector({
           }
         ></div>
       </div>
-      <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
+      {cameraFacing === "user" && <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
         {textForState(identificationState)
           .split("\n")
           .map((text) => (
             <p key={text}>{text}</p>
           ))}
-      </div>
+      </div>}
+
     </div>
   );
 });
