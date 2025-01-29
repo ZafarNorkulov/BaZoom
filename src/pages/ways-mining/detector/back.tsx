@@ -4,7 +4,7 @@ const BackDetectorPage = () => {
   return (
     <section>
       <div className="max-container">
-     <FaceDetector cameraFacing="environment"/>
+        <FaceDetector cameraFacing="environment" />
       </div>
     </section>
   )

@@ -188,6 +188,14 @@ const FaceDetector = memo(function FaceDetector({
     };
   }, [identificationState, isPlaying, cameraFacing]); // cameraFacingni kiritish
 
+  useEffect(() => {
+    // Agar orqa kamera (environment) bo'lsa, yuz aniqlashni va chizish elementlarini yashirish
+    if (cameraFacing === "environment") {
+      setPlaying(false); // Kamera o'ynashni to'xtatish
+      setIdentificationState(IdentificationState.POSITIONING); // Yuz aniqlashni o'chirish
+    }
+  }, [cameraFacing]);
+
   const handleReplay = useCallback(() => {
     setPlaying(true);
   }, []);
@@ -205,7 +213,7 @@ const FaceDetector = memo(function FaceDetector({
             muted
           />
           <canvas
-            className="absolute left-0 top-0 hidden h-px w-px"
+            className={`absolute left-0 top-0 ${cameraFacing === "environment" ? "hidden" : ""}`}
             ref={canvasRef}
             width={VIDEO_RESOLUTION_WIDTH}
             height={VIDEO_RESOLUTION_HEIGHT}
