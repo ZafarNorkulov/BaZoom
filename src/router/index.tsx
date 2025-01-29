@@ -2,6 +2,7 @@ import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import { useEffect, useMemo } from "react";
 import UserInfoStore from "../stores/UserInfoStore";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CameraProvider from "../components/camera-provider/CameraProvider";
 import PageLayout from "../components/page-layout/PageLayout";
 import MainPage from "../pages/main/MainPage";
 import WorkInProgressPage from "../pages/work-in-progress/WorkInProgressPage";
@@ -47,8 +48,14 @@ const Router = () => {
             { path: "/boosts/exchange/variants", element: <ExchangeVariants /> },
             { path: "/boosts/market", element: <BuyBoostMarket /> },
             { path: "/mining-ways", element: <WaysOfMining /> },
-            { path: "/mining-ways/face-detector", element: <FaceDetectorPage /> },
-            { path: "/mining-ways/back-detector", element: <BackDetectorPage /> },
+            {
+              element: <CameraProvider />,
+              children: [
+
+                { path: "/mining-ways/face-detector", element: <FaceDetectorPage /> },
+                { path: "/mining-ways/back-detector", element: <BackDetectorPage /> },
+              ]
+            }
           ],
         },
 

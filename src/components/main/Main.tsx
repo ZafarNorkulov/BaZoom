@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
 } from "react-router-dom";
 import FriendList from "../../pages/friend-list/FriendList";
 import MainPage from "../../pages/main/MainPage";
@@ -31,6 +30,7 @@ import FaceDetectorPage from "../../pages/ways-mining/detector/face";
 import BackDetectorPage from "../../pages/ways-mining/detector/back";
 import History from "../../pages/history";
 import StoreProvider from "../store-provider/StoreProvider";
+import Router from "../../router";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -54,7 +54,7 @@ const router = createBrowserRouter(
     <Route path="/register" element={<RegisterPage />} />,
   ]),
 );
-
+console.log(router)
 i18next
   .use(initReactI18next)
   .use(HttpApi)
@@ -84,7 +84,7 @@ const Main = () => {
     <I18nextProvider i18n={i18next}>
       <WebAppProvider>
       <StoreProvider>
-        <RouterProvider router={router}></RouterProvider>
+        <Router/>
         </StoreProvider>
       </WebAppProvider>
     </I18nextProvider>

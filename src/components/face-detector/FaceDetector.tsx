@@ -96,6 +96,7 @@ const FaceDetector = memo(function FaceDetector({
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const location = useLocation();
+
   if (textForState == null) textForState = defaultTextForState;
   if (textForState == undefined)
     textForState = useContext(TextForStateContext)!;
@@ -125,30 +126,53 @@ const FaceDetector = memo(function FaceDetector({
 
   // Kamera oqimini to'xtatish
   async function stopCamera() {
-    if (videoRef.current?.srcObject) {
-      const stream = videoRef.current.srcObject as MediaStream;
-
-      stream.getTracks().forEach(track => track.stop());
-
-      videoRef.current.srcObject = null;
+    console.log("first");
+  
+    if (!videoRef.current) {
+      console.log("videoRef is null");
+      return;
     }
+  
+    if (!videoRef.current.srcObject) {
+      console.log("videoRef.srcObject is null, no active stream");
+      return;
+    }
+  
+    const stream = videoRef.current.srcObject as MediaStream;
+    console.log("Stopping camera stream...", stream);
+  
+    stream.getTracks().forEach(track => {
+      track.stop();
+      console.log("Stopped track:", track);
+    });
+  
+    videoRef.current.srcObject = null;
+    console.log("Camera stopped successfully");
   }
+  
+  
+  console.log("camera ready")
 
   // Initialize page
   useEffect(() => {
     loadModel();
+
+    // Check if there's an external stream, otherwise start the camera
     if (externalStream) {
       videoRef.current!.srcObject = externalStream;
       setInitiallzing(false);
-      return;
     } else {
       startCamera(cameraFacing); // Kamera ishga tushadi
     }
-
+    if (!(location.pathname.includes("back-detector") || location.pathname.includes("face-detector"))) {
+      stopCamera()
+      console.log("Stopping camera because pathname condition met");
+    }
     return () => {
+      console.log("Component unmounting or pathname changed, stopping camera");
       stopCamera(); // Sahifa o'zgarganda yoki tark etilganda oqimni to'xtatish
     };
-  }, [location.pathname]);
+  }, [location.pathname, cameraFacing]); // Include `cameraFacing` to restart camera when it changes
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");
@@ -225,13 +249,13 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        <div
+        {cameraFacing !== "environment" ? <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
           }}
           className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
-        ></div>
+        ></div> : ""}
         <div
           style={{
             opacity:
@@ -242,6 +266,7 @@ const FaceDetector = memo(function FaceDetector({
           }
         ></div>
       </div>
+      {cameraFacing !== "environment" ? (
       <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
         {textForState(identificationState)
           .split("\n")
@@ -249,6 +274,7 @@ const FaceDetector = memo(function FaceDetector({
             <p key={text}>{text}</p>
           ))}
       </div>
+      ):""}
     </div>
   );
 });
