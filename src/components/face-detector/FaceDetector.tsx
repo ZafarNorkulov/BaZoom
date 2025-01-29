@@ -7,11 +7,7 @@ import {
   memo,
 } from "react";
 import * as faceapi from "face-api.js";
-import "./face-detector.css";
-import {
-  FaceDetectContext,
-  TextForStateContext,
-} from "../../context/MainContext";
+import { FaceDetectContext } from "../../context/MainContext";
 
 enum IdentificationState {
   POSITIONING,
@@ -39,7 +35,7 @@ function overlayBackgroundFromState(state: IdentificationState) {
     case IdentificationState.PENDING:
       return "#896CFE";
     case IdentificationState.SUCCESS:
-      return "#896CFE";
+      return "#64FF54";
     case IdentificationState.ERROR:
       return "#F00";
   }
@@ -85,19 +81,18 @@ const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState,
   externalStream,
-  cameraFacing
+  cameraFacing = "user",
 }: FaceDetectorProps) {
-  const [isInitializing, setInitiallzing] = useState(false);
+  const [isInitializing, setInitializing] = useState(true);
   const [isPlaying, setPlaying] = useState(false);
-  const [identificationState, setIdentificationState] =
-    useState<IdentificationState>(IdentificationState.POSITIONING);
+  const [identificationState, setIdentificationState] = useState<IdentificationState>(
+    IdentificationState.POSITIONING
+  );
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   if (textForState == null) textForState = defaultTextForState;
-  if (textForState == undefined)
-    textForState = useContext(TextForStateContext)!;
   if (tryProcessFaceData == null)
     tryProcessFaceData = useContext(FaceDetectContext)!;
 
@@ -106,7 +101,7 @@ const FaceDetector = memo(function FaceDetector({
   }
 
   // Kamera ishga tushirish
-  async function startCamera(cameraFacing: "user" | "environment" = "user") {
+  async function startCamera(cameraFacing: "user" | "environment") {
     const constraints: MediaStreamConstraints = {
       video: {
         facingMode: { ideal: cameraFacing },
@@ -116,9 +111,8 @@ const FaceDetector = memo(function FaceDetector({
     };
 
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
-
     videoRef.current!.srcObject = stream;
-    setInitiallzing(false);
+    setInitializing(false);
     setPlaying(true);
   }
 
@@ -127,12 +121,21 @@ const FaceDetector = memo(function FaceDetector({
     loadModel();
     if (externalStream) {
       videoRef.current!.srcObject = externalStream;
-      setInitiallzing(false);
+      setInitializing(false);
       return;
     } else {
       startCamera(cameraFacing); // Kamera ishga tushadi
     }
-  }, [cameraFacing]);
+
+    // Cleanup video stream when component is unmounted
+    return () => {
+      if (videoRef.current?.srcObject) {
+        const stream = videoRef.current.srcObject as MediaStream;
+        const tracks = stream.getTracks();
+        tracks.forEach((track) => track.stop()); // Stopping all tracks
+      }
+    };
+  }, [cameraFacing, externalStream]);
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");
@@ -141,25 +144,22 @@ const FaceDetector = memo(function FaceDetector({
       0,
       0,
       VIDEO_RESOLUTION_WIDTH,
-      VIDEO_RESOLUTION_HEIGHT,
+      VIDEO_RESOLUTION_HEIGHT
     );
     const data = canvasRef.current!.toDataURL("image/png");
     const start = performance.now();
     const res = await tryProcessFaceData(data);
     const end = performance.now();
-    setTimeout(
-      () => {
-        if (res) {
-          setIdentificationState(IdentificationState.SUCCESS);
-        } else {
-          setIdentificationState(IdentificationState.ERROR);
-          setTimeout(() => {
-            setIdentificationState(IdentificationState.POSITIONING);
-          }, 4000);
-        }
-      },
-      Math.max(0, 4000 - (end - start)),
-    );
+    setTimeout(() => {
+      if (res) {
+        setIdentificationState(IdentificationState.SUCCESS);
+      } else {
+        setIdentificationState(IdentificationState.ERROR);
+        setTimeout(() => {
+          setIdentificationState(IdentificationState.POSITIONING);
+        }, 4000);
+      }
+    }, Math.max(0, 4000 - (end - start)));
   }, []);
 
   useEffect(() => {
@@ -170,7 +170,7 @@ const FaceDetector = memo(function FaceDetector({
     const interval = setInterval(async () => {
       const detection = await faceapi.detectSingleFace(
         videoRef.current!,
-        new faceapi.TinyFaceDetectorOptions(),
+        new faceapi.TinyFaceDetectorOptions()
       );
 
       if (detection) {
@@ -184,7 +184,7 @@ const FaceDetector = memo(function FaceDetector({
     return () => {
       clearInterval(interval);
     };
-  }, [identificationState, isPlaying]);
+  }, [identificationState, isPlaying, onFaceDetect]);
 
   const handleReplay = useCallback(() => {
     setPlaying(true);
@@ -221,9 +221,7 @@ const FaceDetector = memo(function FaceDetector({
             opacity:
               identificationState === IdentificationState.SUCCESS ? 1 : 0,
           }}
-          className={
-            "video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 bg-gradient-to-l from-[#64FF54] to-[#00DD89] transition-all duration-500 ease-in"
-          }
+          className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 bg-gradient-to-l from-[#64FF54] to-[#00DD89] transition-all duration-500 ease-in"
         ></div>
       </div>
       <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
