@@ -164,7 +164,9 @@ const FaceDetector = memo(function FaceDetector({
 
   useEffect(() => {
     const isFaceRecognitionNeeded =
-      isPlaying && identificationState === IdentificationState.POSITIONING;
+      isPlaying &&
+      identificationState === IdentificationState.POSITIONING &&
+      cameraFacing === "user"; // Yuzni faqat old kamerada aniqlaymiz
     if (!isFaceRecognitionNeeded) return;
 
     const interval = setInterval(async () => {
@@ -184,12 +186,11 @@ const FaceDetector = memo(function FaceDetector({
     return () => {
       clearInterval(interval);
     };
-  }, [identificationState, isPlaying]);
+  }, [identificationState, isPlaying, cameraFacing]); // cameraFacingni kiritish
 
   const handleReplay = useCallback(() => {
     setPlaying(true);
   }, []);
-  console.log(cameraFacing)
 
   return (
     <div className="flex h-max flex-col items-center justify-between">
@@ -210,13 +211,13 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        {cameraFacing === "user" && <div
+        <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
           }}
-          className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
-        ></div>}
+          className={`video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in`}
+        ></div>
         <div
           style={{
             opacity:
@@ -227,14 +228,15 @@ const FaceDetector = memo(function FaceDetector({
           }
         ></div>
       </div>
-      {cameraFacing === "user" && <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
-        {textForState(identificationState)
-          .split("\n")
-          .map((text) => (
-            <p key={text}>{text}</p>
-          ))}
-      </div>}
-
+      {cameraFacing === "user" && (
+        <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
+          {textForState(identificationState)
+            .split("\n")
+            .map((text) => (
+              <p key={text}>{text}</p>
+            ))}
+        </div>
+      )}
     </div>
   );
 });
