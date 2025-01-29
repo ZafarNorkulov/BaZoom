@@ -29,7 +29,7 @@ const FaceDetectorPage = () => {
     <section>
       <div className="max-container !mt-[30px]">
         {isDetectingEnabled && streamReady && (
-          <FaceDetector tryProcessFaceData={onFaceDetect} externalStream={stream} cameraFacing="user" />)}
+          <FaceDetector tryProcessFaceData={onFaceDetect} externalStream={stream} />)}
       </div>
     </section>
   )
