@@ -75,8 +75,8 @@ function PageLayout() {
 
   return isLoading ? (<LoadingScreen progress={loadingProgress} />) : (
     <div className="w-screen overflow-y-scroll overflow-x-hidden scroll-smooth pb-[24vw] font-sans text-gray">
-      
-        
+
+
       {!hasboost ? <Header /> : null}
       <Outlet />
       <NavMenu />

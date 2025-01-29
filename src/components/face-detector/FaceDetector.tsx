@@ -122,6 +122,15 @@ const FaceDetector = memo(function FaceDetector({
     setPlaying(true);
   }
 
+  // Kamera oqimini to'xtatish
+  const stopCameraStream = () => {
+    if (videoRef.current?.srcObject) {
+      const stream = videoRef.current.srcObject as MediaStream;
+      const tracks = stream.getTracks();
+      tracks.forEach((track) => track.stop()); // Oqimni to'xtatish
+    }
+  };
+
   // Initialize page
   useEffect(() => {
     loadModel();
@@ -132,7 +141,11 @@ const FaceDetector = memo(function FaceDetector({
     } else {
       startCamera(cameraFacing); // Kamera ishga tushadi
     }
-  }, [cameraFacing]);
+
+    return () => {
+      stopCameraStream(); // Sahifa o'zgarganda yoki tark etilganda oqimni to'xtatish
+    };
+  }, [cameraFacing, externalStream]);
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");

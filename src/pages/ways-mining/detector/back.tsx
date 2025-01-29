@@ -34,18 +34,18 @@ const BackDetectorPage = () => {
     const startCamera = async () => {
       const constraints: MediaStreamConstraints = {
         video: {
-          facingMode: "environment", // Old kamera
+          facingMode: "environment", // Orqa kamera
         },
       };
-
+  
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     };
-
+  
     startCamera(); // Kamera ishga tushadi
-
+  
     // Cleanup (sahifa o'zgarganda yoki sahifa yopilganda kamerani o'chirish)
     return () => {
       if (videoRef.current?.srcObject) {
@@ -54,7 +54,8 @@ const BackDetectorPage = () => {
         tracks.forEach((track) => track.stop()); // Oqimni to'xtatish
       }
     };
-  }, [location.pathname]); 
+  }, [location.pathname]); // location.pathname o'zgarganda qayta ishga tushadi
+  
 
   // const detectFace = userStore.profile.has_verification_photo;
   return (
