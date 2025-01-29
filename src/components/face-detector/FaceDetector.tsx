@@ -12,6 +12,7 @@ import {
   FaceDetectContext,
   TextForStateContext,
 } from "../../context/MainContext";
+import { useLocation } from "react-router-dom";
 
 enum IdentificationState {
   POSITIONING,
@@ -94,7 +95,7 @@ const FaceDetector = memo(function FaceDetector({
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
+  const location = useLocation();
   if (textForState == null) textForState = defaultTextForState;
   if (textForState == undefined)
     textForState = useContext(TextForStateContext)!;
@@ -123,13 +124,15 @@ const FaceDetector = memo(function FaceDetector({
   }
 
   // Kamera oqimini to'xtatish
-  const stopCameraStream = () => {
+  async function stopCamera() {
     if (videoRef.current?.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
-      const tracks = stream.getTracks();
-      tracks.forEach((track) => track.stop()); // Oqimni to'xtatish
+
+      stream.getTracks().forEach(track => track.stop());
+
+      videoRef.current.srcObject = null;
     }
-  };
+  }
 
   // Initialize page
   useEffect(() => {
@@ -143,9 +146,9 @@ const FaceDetector = memo(function FaceDetector({
     }
 
     return () => {
-      stopCameraStream(); // Sahifa o'zgarganda yoki tark etilganda oqimni to'xtatish
+      stopCamera(); // Sahifa o'zgarganda yoki tark etilganda oqimni to'xtatish
     };
-  }, [cameraFacing, externalStream]);
+  }, [location.pathname]);
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");

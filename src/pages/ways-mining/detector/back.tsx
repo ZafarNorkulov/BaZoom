@@ -37,15 +37,15 @@ const BackDetectorPage = () => {
           facingMode: "environment", // Orqa kamera
         },
       };
-  
+
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     };
-  
+
     startCamera(); // Kamera ishga tushadi
-  
+
     // Cleanup (sahifa o'zgarganda yoki sahifa yopilganda kamerani o'chirish)
     return () => {
       if (videoRef.current?.srcObject) {
@@ -55,18 +55,18 @@ const BackDetectorPage = () => {
       }
     };
   }, [location.pathname]); // location.pathname o'zgarganda qayta ishga tushadi
-  
+
 
   // const detectFace = userStore.profile.has_verification_photo;
   return (
     <section>
-       <div className="max-container">
+      <div className="max-container">
 
-     {/* {isDetectingEnabled&& streamReady && (
+        {/* {isDetectingEnabled&& streamReady && (
 
         <FaceDetector  tryProcessFaceData={onFaceDetect}  externalStream={stream} cameraFacing="environment" />
       )} */}
-       <video ref={videoRef} autoPlay playsInline muted />
+        <video className="w-[200px] aspect-square h-[200px]" ref={videoRef} autoPlay playsInline muted />
       </div>
     </section>
   )
