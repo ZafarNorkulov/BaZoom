@@ -5,10 +5,12 @@ import diceIcon from "./assets/dice.png"
 import taxiIcon from "./assets/taxi.png"
 import tonIcon from "./assets/ton.png"
 import { HistoryProps } from "./history.type"
+import { useTranslation } from "react-i18next"
 
 
 
 const HistoryItem = ({ bid, status, dropped, price, time }: HistoryProps) => {
+    const { t } = useTranslation()
     return (
         <div className="flex items-start gap-[10px] ">
             <div>
@@ -18,8 +20,8 @@ const HistoryItem = ({ bid, status, dropped, price, time }: HistoryProps) => {
 
                 <div className="flex justify-between w-[300px]">
                     <div className="flex flex-col justify-between items-start gap-[2px]">
-                        <h5 className="text-sm leading-5 font-semibold text-white">Ставка: {bid}</h5>
-                        <p className={`text-xs leading-4 font-medium ${status == "win" ? "text-green" : "text-red"}`}>Выигрыш. Выпало: {dropped}</p>
+                        <h5 className="text-sm leading-5 font-semibold text-white">{t("pages.history.title")} {bid}</h5>
+                        <p className={`text-xs leading-4 font-medium ${status == "win" ? "text-green" : "text-red"}`}>{status === "win" ? t("pages.history.descWin") : t("pages.history.descLose")} {dropped}</p>
                     </div>
                     <div className="flex flex-col justify-between items-end">
                         <div className="flex items-center gap-1">

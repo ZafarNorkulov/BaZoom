@@ -33,7 +33,7 @@ const BuyBoostMarket = () => {
   const { t } = useTranslation()
   return (
     <section>
-      <BackPage title="Покупка  буста по рынку" />
+      <BackPage title={t("pages.boostMarket.head")} />
       <div className="max-container">
         <div className="block w-full py-3 bg-deepgray rounded-xl text-center mt-[30px]">{t("pages.boostMarket.choosingToken")}</div>
         <div className="flex flex-col gap-[15px] mt-5">

@@ -5,6 +5,7 @@ import taxi from "../../assets/taxitaxi.jpeg"
 import virus from "../../assets/virus.png"
 import rightArrow from "../../assets/right-order-arrow.png"
 import clock from "../../assets/clock-circle.png"
+import { useTranslation } from "react-i18next"
 
 // const NotOrders = () => {
 //     return (
@@ -17,7 +18,7 @@ import clock from "../../assets/clock-circle.png"
 
 const Orders = () => {
 
-
+    const { t } = useTranslation()
 
     return (
         <div>
@@ -25,7 +26,7 @@ const Orders = () => {
                 <label htmlFor="checkbox" className="flex items-center text-sm mt-5 leading-5 font-medium gap-[10px]">
 
                     <input type="checkbox" defaultChecked id="checkbox" className="accent-purple w-6 h-6" />
-                    Скрыть другие пары.
+                   {t("pages.exchange.orders.checkbox")}
                 </label>
             </div>
             <Divider className="mt-5" />
@@ -33,8 +34,8 @@ const Orders = () => {
                 <div className="card py-[17px] pl-5 pr-3 bg-deepgray rounded-[14px]">
                     <div className="flex justify-between items-center">
 
-                        <h5 className="text-xs leading-5 font-medium text-green">Покупка Лимит</h5>
-                        <button className="text-[10px] text-[#8F9098] px-2 rounded-[8px] border border-[#8F9098] ">Отменить ордер</button>
+                        <h5 className="text-xs leading-5 font-medium text-green">{t("pages.exchange.orders.cards.title")}</h5>
+                        <button className="text-[10px] text-[#8F9098] px-2 rounded-[8px] border border-[#8F9098] ">{t("pages.exchange.orders.cards.button")}</button>
                     </div>
                     {/* Crypto */}
                     <div className="flex items-center gap-[15px] mt-[15px]">
@@ -60,8 +61,8 @@ const Orders = () => {
                     {/* KURS */}
 
                     <div className="mt-[15px]">
-                        <p className="text-[10px] leading-3 font-medium text-[#8F9098]">Курс: 11 <br />
-                            Кол-во: 0/0.224452214</p>
+                        <p className="text-[10px] leading-3 font-medium text-[#8F9098]">{t("pages.exchange.orders.cards.rate")}: 11 <br />
+                        {t("pages.exchange.orders.cards.quantity")}: 0/0.224452214</p>
 
                     </div>
                     {/* SLIDER */}
@@ -71,7 +72,7 @@ const Orders = () => {
                             <span className={"block w-[27%] h-full taxi-gradient rounded-[9px]"}></span>
                         </div>
                         <div className="w-full flex items-center justify-between mt-[5px]">
-                            <span className="text-xs leading-[14.5px]  ">Исполнено</span>
+                            <span className="text-xs leading-[14.5px]  ">{t("pages.exchange.orders.cards.completed")}</span>
                             <span className="text-xs leading-[14.5px] font-medium text-white">27%</span>
                         </div>
                     </div>
@@ -81,8 +82,8 @@ const Orders = () => {
                 <div className="card py-[17px] pl-5 pr-3 bg-deepgray rounded-[14px]">
                     <div className="flex justify-between items-center">
 
-                        <h5 className="text-xs leading-5 font-medium text-red">Продажа Лимит</h5>
-                        <button className="text-[10px] text-[#8F9098] px-2 rounded-[8px] border border-[#8F9098] ">Отменить ордер</button>
+                        <h5 className="text-xs leading-5 font-medium text-red">{t("pages.exchange.orders.cards.title")}</h5>
+                        <button className="text-[10px] text-[#8F9098] px-2 rounded-[8px] border border-[#8F9098] ">{t("pages.exchange.orders.cards.button")}</button>
                     </div>
                     {/* Crypto */}
                     <div className="flex items-center gap-[15px] mt-[15px]">
@@ -108,8 +109,8 @@ const Orders = () => {
                     {/* KURS */}
 
                     <div className="mt-[15px]">
-                        <p className="text-[10px] leading-3 font-medium text-[#8F9098]">Курс: 11 <br />
-                            Кол-во: 0/0.224452214</p>
+                        <p className="text-[10px] leading-3 font-medium text-[#8F9098]">{t("pages.exchange.orders.cards.rate")}: 11 <br />
+                        {t("pages.exchange.orders.cards.quantity")}: 0/0.224452214</p>
 
                     </div>
                     {/* SLIDER */}
@@ -119,7 +120,7 @@ const Orders = () => {
                             <span className={"block w-[53%] h-full taxi-gradient rounded-[9px]"}></span>
                         </div>
                         <div className="w-full flex items-center justify-between mt-[5px]">
-                            <span className="text-xs leading-[14.5px]  ">Исполнено</span>
+                            <span className="text-xs leading-[14.5px]  ">{t("pages.exchange.orders.cards.completed")}</span>
                             <span className="text-xs leading-[14.5px] font-medium text-white">53%</span>
                         </div>
                     </div>

@@ -5,12 +5,14 @@ import Divider from "../../../components/divider";
 import dribble from "../../../assets/Dribbble-Light.svg"
 import StarIcon from "../../../components/icons/star";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const BuyBoostExchange = () => {
+    const { t } = useTranslation()
     const [tabs, setTabs] = useState([
-        {
+        {   
             id: 1,
-            title: "Все",
+            title: t("pages.exchange.all"),
             active: true
         },
         {
@@ -33,13 +35,13 @@ const BuyBoostExchange = () => {
     };
     return (
         <section>
-            <BackPage title="Покупка буста на бирже" />
+            <BackPage title={t("pages.exchange.head")} />
             <div className="max-container">
                 {/* SearchBar */}
                 <div className="input px-3 flex items-center gap-[15px] mt-5 bg-[#060606] h-[44px] rounded-full">
                     <img src={search} />
 
-                    <input type="text" placeholder="Поиск пары" className="text-sm leading-5 text-gray bg-[#060606] w-full focus-visible:outline-none  " />
+                    <input type="text" placeholder={t("pages.exchange.search")} className="text-sm leading-5 text-gray bg-[#060606] w-full focus-visible:outline-none  " />
                 </div>
 
                 {/* TABS */}
@@ -62,36 +64,36 @@ const BuyBoostExchange = () => {
             <div className="max-container flex justify-between items-center !mt-3">
                 <div className="flex items-center gap-[10px]">
                     <div className="flex items-center gap-[3px]">
-                        <h4 className="text-sm leading-4 font-medium">ИМЯ</h4>
+                        <h4 className="text-sm leading-4 font-medium">{t("pages.exchange.name")}</h4>
                         <img src={dribble} className="w-[10px] h-[10px]" />
                     </div>
                     <div className="flex items-center gap-[3px]">
-                        <h4 className="text-sm leading-4 font-medium">ОБЪЁМ</h4>
+                        <h4 className="text-sm leading-4 font-medium">{t("pages.exchange.volume")}</h4>
                         <img src={dribble} className="w-[10px] h-[10px]" />
                     </div>
                 </div>
                 <div className="flex items-center gap-[10px]">
                     <div className="flex items-center gap-[3px]">
-                        <h4 className="text-sm leading-4 font-medium">ЦЕНА</h4>
+                        <h4 className="text-sm leading-4 font-medium">{t("pages.exchange.price")}</h4>
                         <img src={dribble} className="w-[10px] h-[10px]" />
                     </div>
                     <div className="flex items-center gap-[3px]">
-                        <h4 className="text-sm leading-4 font-medium">ИЗМ.</h4>
+                        <h4 className="text-sm leading-4 font-medium">{t("pages.exchange.change")}</h4>
                         <img src={dribble} className="w-[10px] h-[10px]" />
                     </div>
                 </div>
             </div>
             <Divider className="mt-4" />
             <div className="max-container !mt-5">
-                <div className="w-full bg-deepgray rounded-xl text-center py-3"><h5 className="text-xs leading-[14.5px] font-bold" >Фавориты</h5></div>
+                <div className="w-full bg-deepgray rounded-xl text-center py-3"><h5 className="text-xs leading-[14.5px] font-bold" >{t("pages.exchange.favourite")}</h5></div>
                 <div className="flex items-center gap-2 mt-[14px]">
                     <StarIcon color="#896CFE" />
-                    <h4 className="text-sm leading-4 text-[#8F9098]">Добавьте Ваши любимые пары.</h4>
+                    <h4 className="text-sm leading-4 text-[#8F9098]">{t("pages.exchange.favourite_pair")}</h4>
                 </div>
             </div>
             <Divider className="mt-4" />
             <div className="max-container !mt-5">
-                <div className="w-full bg-deepgray rounded-xl text-center py-3"><h5 className="text-xs leading-[14.5px] font-bold" >Все токены</h5></div>
+                <div className="w-full bg-deepgray rounded-xl text-center py-3"><h5 className="text-xs leading-[14.5px] font-bold" >{t("pages.exchange.tokens")}</h5></div>
                 {/* tokens */}
                 <div className="flex flex-col gap-[15px] mt-5">
                     {/* 1 */}

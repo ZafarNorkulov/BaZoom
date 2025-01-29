@@ -1,10 +1,11 @@
+import { useTranslation } from "react-i18next"
 import BackPage from "../../components/backPage"
 import { HistoryProps } from "./history.type"
 import HistoryItem from "./historyItem"
 
 
 const History = () => {
-
+    const { t } = useTranslation()
 
     const datas: HistoryProps[] = [
         {
@@ -157,7 +158,7 @@ const History = () => {
     ]
     return (
         <section>
-            <BackPage title="История" />
+            <BackPage title={t("pages.history.head")} />
             <div className="max-container !mt-[30px]">
                 <div className="flex flex-col gap-[15px]">
                     {datas?.map(item => (

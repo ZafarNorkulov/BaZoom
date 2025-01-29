@@ -39,6 +39,12 @@
       "diceMining": "DICE Mining",
       "available": "Available"
     },
+    "history": {
+      "head": "History",
+      "title": "Bet:",
+      "descWin": "Win. It dropped:",
+      "descLose": "Loss. It dropped:"
+    },
     "friends": {
       "inviteText": {
         "part1": "Get a fixed bonus up to 5K",
@@ -133,12 +139,51 @@
       "exchangeText": "Fish is a text with a description of what buying on the stock exchange is. Fish-text, fish-text, text, text, text."
     },
     "boostMarket": {
+      "head":"Buying a boost by market",
       "choosingToken": "Choosing a token",
       "buy": "BUY",
       "confirm": "Confirm",
       "modalTitle": "Transaction confirmation",
       "modalText": "When you purchase a $100 TAXI, 0.01 TON will be debited from your wallet in the bot. You will also receive a reward of 100,000 game DICE.Are you confirming the transaction?"
     },
+    "exchange": {
+      "head": "Purchase of a boost on the exchange",
+      "search": "Pair search",
+      "all": "All",
+      "name": "NAME",
+      "volume": "ОБЪЁМ",
+      "price": "ЦЕНА",
+      "change": "CHNG.",
+      "favourite": "Favorites",
+      "favourite_pair": "Add your favorite pairs.",
+      "tokens": "All tokens",
+      "trading": {
+        "volume": "24h Volume:",
+        "price": "Price",
+        "quantity": "Qty",
+        "button1": "Buy",
+        "button2": "Sell",
+        "limit": "Limit",
+        "balance":"Balance",
+        "total": "Total"
+      },
+      "orders":{
+        "checkbox":"Hide other pairs.",
+        "cards":{
+          "title":"Purchase Limit",
+          "button":"Cancel the order",
+          "rate":"Rate",
+          "quantity":"Qty",
+          "completed":"Completed"
+        }
+      },
+      "tabs": {
+        "tab1": "Trading",
+        "tab2": "Open orders",
+        "tab3": "grafic"
+      }
+    },
+   
     "telegramRedirect": {
       "title": "Better Experience in Telegram",
       "description": "This game works best in Telegram. Click below to open in Telegram.",

@@ -3,6 +3,7 @@ import Divider from "../divider"
 import transfer from "../../assets/transfer.png"
 import taxi from "../../assets/taxitaxi.jpeg"
 import questionGray from "../../assets/question-gray.svg"
+import { useTranslation } from "react-i18next"
 // import rightGrayArrow from "../../assets/Right0gray-Button.png"
 
 const Trading = () => {
@@ -11,7 +12,7 @@ const Trading = () => {
     const [quantity, setQuantity] = useState<number>(0)
     const [total, setTotal] = useState<number>(0)
     const selectRef = useRef<HTMLSelectElement | null>(null);
-
+    const { t } = useTranslation()
 
     return (
         <div>
@@ -26,7 +27,7 @@ const Trading = () => {
                         </div>
                         <span className="text-xs leading-5 font-semibold text-green">+0.54%</span>
                     </div>
-                    <p className="text-[10px] leading-3 "> 24ч Объём: 1.008М TAXI / 75.36K TON</p>
+                    <p className="text-[10px] leading-3 "> {t("pages.exchange.trading.volume")}: 1.008М TAXI / 75.36K TON</p>
                 </div>
                 <div>
                     <img src={taxi} className="w-[35px] h-[35px] rounded-full" />
@@ -40,7 +41,7 @@ const Trading = () => {
                     <div className="flex gap-5 ">
                         <div className="flex flex-col gap-[11px] items-center w-[40px]">
                             <span className="text-wrap text-[11px] leading-[14.5px] text-gray text-center w-full h-auto">
-                                Цена <br />(TON)
+                                {t("pages.exchange.trading.price")} <br />(TON)
                             </span>
                             <div className="flex flex-col items-end gap-[6px] text-xs leading-3 text-red">
                                 <p>0.0758</p>
@@ -52,7 +53,7 @@ const Trading = () => {
                         </div>
                         <div className="flex flex-col gap-[11px] items-center w-[41px]">
                             <span className="text-[11px] leading-[14.5px] text-gray text-right">
-                                Кол-во
+                                {t("pages.exchange.trading.quantity")}
                                 <br />
                                 (TAXI)
                             </span>
@@ -95,20 +96,20 @@ const Trading = () => {
                 {/* Right Content */}
                 <div className="flex flex-col w-[222px]">
                     <div className="p-[2px] bg-deepgray rounded-md">
-                        <button className={`w-1/2 text-xs leading-[14.5px] font-medium ${isActive && "bg-green text-white"}  rounded-md  py-[6px]`} onClick={() => setIsActive(true)}>Купить</button>
-                        <button className={`w-1/2 text-xs leading-[14.5px] font-medium ${!isActive && "bg-red text-white"} rounded-md  py-[6px]`} onClick={() => setIsActive(false)}>Продать</button>
+                        <button className={`w-1/2 text-xs leading-[14.5px] font-medium ${isActive && "bg-green text-white"}  rounded-md  py-[6px]`} onClick={() => setIsActive(true)}>{t("pages.exchange.trading.button1")}</button>
+                        <button className={`w-1/2 text-xs leading-[14.5px] font-medium ${!isActive && "bg-red text-white"} rounded-md  py-[6px]`} onClick={() => setIsActive(false)}>{t("pages.exchange.trading.button2")}</button>
                     </div>
                     <div className="bg-deepgray w-full flex items-center mt-2 px-[10px] rounded-md">
                         <img src={questionGray} className="w-[15px] h-[15px] rounded-full" />
                         <select ref={selectRef} className="w-full text-center h-8 bg-deepgray ">
-                            <option className="w-full bg-deepgray">Лимит</option>
-                            <option className="w-full bg-deepgray">Лимит</option>
+                            <option className="w-full bg-deepgray">{t("pages.exchange.trading.limit")}</option>
+                            <option className="w-full bg-deepgray">{t("pages.exchange.trading.limit")}</option>
                         </select>
 
                     </div>
                     {/* Price Input */}
                     <div className="bg-deepgray w-full flex items-center justify-between mt-[3px] px-[10px] py-[6px] rounded-md">
-                        <input type="number" value={price} onChange={(e) => setPrice(+e.target.value)} placeholder="Цена (TON)" className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
+                        <input type="number" value={price} onChange={(e) => setPrice(+e.target.value)} placeholder={`${t("pages.exchange.trading.price")} (TON)`} className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
                         <div className="flex items-center gap-[15px]">
                             <button
                                 className="text-2xl font-bold"
@@ -126,7 +127,7 @@ const Trading = () => {
                     </div>
                     {/* Quantity Input */}
                     <div className="bg-deepgray w-full flex items-center justify-between mt-[3px] px-[10px] py-[6px] rounded-md">
-                        <input type="number" value={quantity} onChange={(e) => setQuantity(+e.target.value)} placeholder="Кол-во (TAXI)" className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
+                        <input type="number" value={quantity} onChange={(e) => setQuantity(+e.target.value)} placeholder={`${t("pages.exchange.trading.quantity")} (TAXI)`} className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
                         <div className="flex items-center gap-[15px]">
                             <button
                                 className="text-2xl font-bold"
@@ -166,7 +167,7 @@ const Trading = () => {
                     {/* Total Input */}
 
                     <div className="bg-deepgray w-full flex items-center justify-between mt-[15px] px-[10px] py-[6px] rounded-md">
-                        <input type="number" value={total} onChange={(e) => setTotal(+e.target.value)} placeholder="Итого (TON)" className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
+                        <input type="number" value={total} onChange={(e) => setTotal(+e.target.value)} placeholder={`${t("pages.exchange.trading.total")} (TON)`} className="max-w-[150px] h-[20px] w-full bg-deepgray text-sm leading-4 focus-within:outline-none " />
                         <div className="flex items-center gap-[15px]">
                             <button
                                 className="text-2xl font-bold"
@@ -187,10 +188,10 @@ const Trading = () => {
                     <div className="flex flex-col gap-1 mt-6">
 
                         <div className="flex justify-between items-center ">
-                            <span className="text-xs leading-[14.5px] ">Баланс</span>
+                            <span className="text-xs leading-[14.5px] ">{t("pages.exchange.trading.balance")}</span>
                             <span className="text-white text-xs leading-[14.5px] font-medium">0.742504 TON</span>
                         </div>
-                        <button className={`w-full ${isActive ? "bg-green" : "bg-red"}  text-white py-[13px] leading-5 text-center font-bold rounded-[8px]`}>Купить TAXI</button>
+                        <button className={`w-full ${isActive ? "bg-green" : "bg-red"}  text-white py-[13px] leading-5 text-center font-bold rounded-[8px]`}>{t("pages.exchange.trading.button1")} TAXI</button>
                     </div>
                 </div>
             </div>

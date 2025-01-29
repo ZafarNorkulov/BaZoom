@@ -3,23 +3,25 @@ import Divider from "../../../../components/divider";
 import Trading from "../../../../components/exchange/trading";
 import Orders from "../../../../components/exchange/orders";
 import Grafic from "../../../../components/exchange/grafic";
+import { useTranslation } from "react-i18next";
 
 const ExchangeVariants = () => {
+  const { t } = useTranslation()
 
   const [tabs, setTabs] = useState([
     {
       id: 1,
-      title: "Торговля",
+      title: t("pages.exchange.tabs.tab1"),
       active: true
     },
     {
       id: 2,
-      title: "Открытые ордера (0)",
+      title: `${t("pages.exchange.tabs.tab2")} (2)`,
       active: false
     },
     {
       id: 3,
-      title: "TAXI/TON график",
+      title: `TAXI/TON ${t("pages.exchange.tabs.tab3")}`,
       active: false
     },
   ]);
