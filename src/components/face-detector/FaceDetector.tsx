@@ -85,7 +85,7 @@ const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState,
   externalStream,
-  cameraFacing
+  cameraFacing="user"
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -189,6 +189,7 @@ const FaceDetector = memo(function FaceDetector({
   const handleReplay = useCallback(() => {
     setPlaying(true);
   }, []);
+  console.log(cameraFacing)
 
   return (
     <div className="flex h-max flex-col items-center justify-between">
