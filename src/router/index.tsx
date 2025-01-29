@@ -35,7 +35,7 @@ const Router = () => {
         {
           element: <PageLayout />,
           children: [
-            { path: "/main", element: <MainPage /> },
+            { path: "/", element: <MainPage /> },
             { path: "/history", element: <History /> },
             { path: "/groups", element: <WorkInProgressPage /> },
             { path: "/wallet", element: <WorkInProgressPage /> },
