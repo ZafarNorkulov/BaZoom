@@ -220,12 +220,12 @@ const FaceDetector = memo(function FaceDetector({
           onFaceDetect();
         }
       }
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(interval);
     };
-  }, [identificationState, isPlaying]);
+  }, [identificationState, isPlaying,detectFace]);
 
   const handleReplay = useCallback(() => {
     setPlaying(true);
@@ -258,12 +258,10 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        {cameraFacing !== "environment" ? <div
+        {cameraFacing == "user" ? <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
-            maskSize: "100% 100%",
-
           }}
           className="video-box-size pc:!h-[190px] video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
         ></div> : ""}
