@@ -17,8 +17,7 @@ import BuyBoostExchange from "../pages/boosts/exchange";
 import ExchangeVariants from "../pages/boosts/exchange/variants";
 import BuyBoostMarket from "../pages/boosts/market";
 import WaysOfMining from "../pages/ways-mining";
-import FaceDetectorPage from "../pages/ways-mining/detector/face";
-import BackDetectorPage from "../pages/ways-mining/detector/back";
+import Detector from "../pages/ways-mining/detector";
 
 
 const Router = () => {
@@ -52,8 +51,7 @@ const Router = () => {
               element: <CameraProvider />,
               children: [
 
-                { path: "/mining-ways/face-detector", element: <FaceDetectorPage /> },
-                { path: "/mining-ways/back-detector", element: <BackDetectorPage /> },
+                { path: "/mining-ways/detector", element: <Detector /> },
               ]
             }
           ],

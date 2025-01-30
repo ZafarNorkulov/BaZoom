@@ -13,9 +13,9 @@ const WaysOfMining = () => {
     };
     useEffect(() => {
         if (selectedOption === "1") {
-            navigate("/mining-ways/face-detector")
+            navigate("/mining-ways/detector?face=true")
         } else if (selectedOption === "2") {
-            navigate("/mining-ways/back-detector")
+            navigate("/mining-ways/detector?face=false")
         }
     }, [selectedOption])
 

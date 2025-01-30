@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { StreamContext, StreamReadyContext } from "../../context/StreamCotext";
 import { useShowPopup } from "@vkruglikov/react-telegram-web-app";
 import { useTranslation } from "react-i18next";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 const CameraProvider = observer(() => {
@@ -11,7 +11,8 @@ const CameraProvider = observer(() => {
   const showPopup = useShowPopup();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const location = useLocation()
+  const [params] = useSearchParams()
+  const isFace = params.get("face") == "true"
   useEffect(() => {
     navigator.mediaDevices;
     const st = navigator.mediaDevices
@@ -19,7 +20,7 @@ const CameraProvider = observer(() => {
         video: {
           width: { ideal: 300 },
           height: { ideal: 300 },
-          facingMode: location.pathname.includes("face-detector")
+          facingMode: isFace
             ? "user"
             : "environment",
         },

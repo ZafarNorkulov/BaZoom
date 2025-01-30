@@ -29,11 +29,15 @@
     "main": {
       "scannerStates": {
         "positioning": "Place your head in \n the mind-scanner!",
+        "positioningWithout": "Click on to the scanner \n to send a photo",
         "pending": "Calculating the token hash \n in your memory block!",
+        "pendingWithout": "Photo processing \n is in progress.",
         "success": "Hash found, token recorded \n and extracted to your account!",
+        "successWithout": "Photo accepted! Happy mining!",
         "error": "Strain your brain! \n Help find the token!)))",
-        "cameraIsNotAllowed": "You have given up mining! But you can earn $DICE by inviting friends and completing tasks!",
-        "cameraIsNotAllowdReg": "To register, you need to create a mental image. Please turn on the camera",
+        "errorWithout": "Error processing photo.\n Try again!",
+        "cameraIsNotAllowed": "You've given up the most profitable mining option, but you can earn $DICE by uploading photos you take of interesting places and people, with their permission of course!",
+        "cameraIsNotAllowedReg": "To register, you need to create a mental image. Please turn on the camera",
         "inviteFriend": "Invite a friend"
       },
       "diceMining": "DICE Mining",

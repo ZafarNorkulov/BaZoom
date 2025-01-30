@@ -21,8 +21,8 @@ enum IdentificationState {
   ERROR,
 }
 
-const VIDEO_RESOLUTION_HEIGHT = 300;
-const VIDEO_RESOLUTION_WIDTH = 300;
+const VIDEO_RESOLUTION_HEIGHT = 250;
+const VIDEO_RESOLUTION_WIDTH = 250;
 
 const INTERSECTION_LOWER_THRESHOLD = 0.9;
 const INTERSECTION_UPPER_THRESHOLD = 1.2;
@@ -84,7 +84,7 @@ interface FaceDetectorProps {
 
 const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
-  textForState,
+  textForState = defaultTextForState,
   externalStream,
   cameraFacing
 }: FaceDetectorProps) {
@@ -126,7 +126,6 @@ const FaceDetector = memo(function FaceDetector({
 
   // Kamera oqimini to'xtatish
   async function stopCamera() {
-    console.log("first");
   
     if (!videoRef.current) {
       console.log("videoRef is null");
@@ -164,7 +163,7 @@ const FaceDetector = memo(function FaceDetector({
     } else {
       startCamera(cameraFacing); // Kamera ishga tushadi
     }
-    if (!(location.pathname.includes("back-detector") || location.pathname.includes("face-detector"))) {
+    if (!location.pathname.includes("detector")) {
       stopCamera()
       console.log("Stopping camera because pathname condition met");
     }
@@ -232,7 +231,7 @@ const FaceDetector = memo(function FaceDetector({
 
   return (
     <div className="flex h-max flex-col items-center justify-between">
-      <div className="video-box-size relative flex items-center justify-center overflow-hidden">
+      <div className="video-box-size  !h-[190px] relative flex items-center justify-center overflow-hidden">
         <div className="video-container relative flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
@@ -253,8 +252,10 @@ const FaceDetector = memo(function FaceDetector({
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
+            maskSize: "100% 100%",
+            
           }}
-          className="video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
+          className="video-box-size !h-[190px] video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
         ></div> : ""}
         <div
           style={{
@@ -266,15 +267,14 @@ const FaceDetector = memo(function FaceDetector({
           }
         ></div>
       </div>
-      {cameraFacing !== "environment" ? (
-      <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
+  
+      <div className="ml-4 mr-4 mt-3 text-center text-lg leading-5 font-bold text-white">
         {textForState(identificationState)
           .split("\n")
           .map((text) => (
             <p key={text}>{text}</p>
           ))}
       </div>
-      ):""}
     </div>
   );
 });
