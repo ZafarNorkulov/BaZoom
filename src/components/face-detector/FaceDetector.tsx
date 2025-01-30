@@ -80,13 +80,15 @@ interface FaceDetectorProps {
   textForState?: (state: IdentificationState) => string;
   externalStream?: MediaStream;
   cameraFacing?: "user" | "environment";
+  detectFace:boolean
 }
 
 const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState = defaultTextForState,
   externalStream,
-  cameraFacing
+  cameraFacing,
+  detectFace
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -126,30 +128,30 @@ const FaceDetector = memo(function FaceDetector({
 
   // Kamera oqimini to'xtatish
   async function stopCamera() {
-  
+
     if (!videoRef.current) {
       console.log("videoRef is null");
       return;
     }
-  
+
     if (!videoRef.current.srcObject) {
       console.log("videoRef.srcObject is null, no active stream");
       return;
     }
-  
+
     const stream = videoRef.current.srcObject as MediaStream;
     console.log("Stopping camera stream...", stream);
-  
+
     stream.getTracks().forEach(track => {
       track.stop();
       console.log("Stopped track:", track);
     });
-  
+
     videoRef.current.srcObject = null;
     console.log("Camera stopped successfully");
   }
-  
-  
+
+
   console.log("camera ready")
 
   // Initialize page
@@ -203,7 +205,7 @@ const FaceDetector = memo(function FaceDetector({
 
   useEffect(() => {
     const isFaceRecognitionNeeded =
-      isPlaying && identificationState === IdentificationState.POSITIONING;
+      detectFace && isPlaying && identificationState === IdentificationState.POSITIONING;
     if (!isFaceRecognitionNeeded) return;
 
     const interval = setInterval(async () => {
@@ -229,9 +231,17 @@ const FaceDetector = memo(function FaceDetector({
     setPlaying(true);
   }, []);
 
+  const submitPhoto = useCallback(async () => {
+    if (detectFace || identificationState != IdentificationState.POSITIONING)
+      return;
+    setIdentificationState(IdentificationState.PENDING);
+    await onFaceDetect();
+  }, [detectFace, identificationState]);
+
   return (
     <div className="flex h-max flex-col items-center justify-between">
-      <div className="video-box-size  pc:!h-[190px] relative flex items-center justify-center overflow-hidden">
+      <div className="video-box-size  pc:!h-[190px] relative flex items-center justify-center overflow-hidden"
+        onClick={submitPhoto}>
         <div className="video-container relative flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
@@ -253,7 +263,7 @@ const FaceDetector = memo(function FaceDetector({
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
             maskSize: "100% 100%",
-            
+
           }}
           className="video-box-size pc:!h-[190px] video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
         ></div> : ""}
@@ -267,7 +277,7 @@ const FaceDetector = memo(function FaceDetector({
           }
         ></div>
       </div>
-  
+
       <div className="ml-4 mr-4 mt-3 text-center text-lg leading-5 font-bold text-white">
         {textForState(identificationState)
           .split("\n")
