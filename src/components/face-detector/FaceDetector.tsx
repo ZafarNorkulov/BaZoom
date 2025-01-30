@@ -231,7 +231,7 @@ const FaceDetector = memo(function FaceDetector({
 
   return (
     <div className="flex h-max flex-col items-center justify-between">
-      <div className="video-box-size  !h-[190px] relative flex items-center justify-center overflow-hidden">
+      <div className="video-box-size  pc:!h-[190px] relative flex items-center justify-center overflow-hidden">
         <div className="video-container relative flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
@@ -255,7 +255,7 @@ const FaceDetector = memo(function FaceDetector({
             maskSize: "100% 100%",
             
           }}
-          className="video-box-size !h-[190px] video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
+          className="video-box-size pc:!h-[190px] video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
         ></div> : ""}
         <div
           style={{
