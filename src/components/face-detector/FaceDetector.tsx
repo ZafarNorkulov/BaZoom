@@ -1,10 +1,10 @@
 import {
+  memo,
   useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
-  memo,
 } from "react";
 import * as faceapi from "face-api.js";
 import "./face-detector.css";
@@ -12,7 +12,6 @@ import {
   FaceDetectContext,
   TextForStateContext,
 } from "../../context/MainContext";
-import { useLocation } from "react-router-dom";
 
 enum IdentificationState {
   POSITIONING,
@@ -21,8 +20,8 @@ enum IdentificationState {
   ERROR,
 }
 
-const VIDEO_RESOLUTION_HEIGHT = 250;
-const VIDEO_RESOLUTION_WIDTH = 250;
+const VIDEO_RESOLUTION_HEIGHT = 300;
+const VIDEO_RESOLUTION_WIDTH = 300;
 
 const INTERSECTION_LOWER_THRESHOLD = 0.9;
 const INTERSECTION_UPPER_THRESHOLD = 1.2;
@@ -79,14 +78,14 @@ interface FaceDetectorProps {
   tryProcessFaceData?: (data: string) => Promise<boolean>;
   textForState?: (state: IdentificationState) => string;
   externalStream?: MediaStream;
-  cameraFacing?: "user" | "environment";
+  detectFace: boolean;
 }
 
 const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
-  textForState = defaultTextForState,
+  textForState,
   externalStream,
-  cameraFacing
+  detectFace,
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -95,7 +94,6 @@ const FaceDetector = memo(function FaceDetector({
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const location = useLocation();
 
   if (textForState == null) textForState = defaultTextForState;
   if (textForState == undefined)
@@ -107,71 +105,29 @@ const FaceDetector = memo(function FaceDetector({
     await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
   }
 
-  // Kamera ishga tushirish
-  async function startCamera(cameraFacing: "user" | "environment" = "user") {
-    const constraints: MediaStreamConstraints = {
-      video: {
-        facingMode: { ideal: cameraFacing },
-        width: { ideal: VIDEO_RESOLUTION_WIDTH },
-        height: { ideal: VIDEO_RESOLUTION_HEIGHT },
-      },
-    };
-
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-    videoRef.current!.srcObject = stream;
-    setInitiallzing(false);
-    setPlaying(true);
-  }
-
-  // Kamera oqimini to'xtatish
-  async function stopCamera() {
-  
-    if (!videoRef.current) {
-      console.log("videoRef is null");
-      return;
-    }
-  
-    if (!videoRef.current.srcObject) {
-      console.log("videoRef.srcObject is null, no active stream");
-      return;
-    }
-  
-    const stream = videoRef.current.srcObject as MediaStream;
-    console.log("Stopping camera stream...", stream);
-  
-    stream.getTracks().forEach(track => {
-      track.stop();
-      console.log("Stopped track:", track);
-    });
-  
-    videoRef.current.srcObject = null;
-    console.log("Camera stopped successfully");
-  }
-  
-  
-  console.log("camera ready")
+  // async function startCamera() {
+  //   navigator.mediaDevices;
+  //   const stream = await navigator.mediaDevices.getUserMedia({
+  //     video: {
+  //       width: { ideal: VIDEO_RESOLUTION_WIDTH },
+  //       height: { ideal: VIDEO_RESOLUTION_HEIGHT },
+  //     },
+  //   });
+  //
+  //   videoRef.current!.srcObject = stream;
+  //
+  //   return stream;
+  // }
 
   // Initialize page
   useEffect(() => {
     loadModel();
-
-    // Check if there's an external stream, otherwise start the camera
     if (externalStream) {
       videoRef.current!.srcObject = externalStream;
       setInitiallzing(false);
-    } else {
-      startCamera(cameraFacing); // Kamera ishga tushadi
+      return;
     }
-    if (!location.pathname.includes("detector")) {
-      stopCamera()
-      console.log("Stopping camera because pathname condition met");
-    }
-    return () => {
-      console.log("Component unmounting or pathname changed, stopping camera");
-      stopCamera(); // Sahifa o'zgarganda yoki tark etilganda oqimni to'xtatish
-    };
-  }, [location.pathname, cameraFacing]); // Include `cameraFacing` to restart camera when it changes
+  }, []);
 
   const onFaceDetect = useCallback(async () => {
     const ctx = canvasRef.current!.getContext("2d");
@@ -201,9 +157,12 @@ const FaceDetector = memo(function FaceDetector({
     );
   }, []);
 
+  // Interval For face detection
   useEffect(() => {
     const isFaceRecognitionNeeded =
-      isPlaying && identificationState === IdentificationState.POSITIONING;
+      detectFace &&
+      isPlaying &&
+      identificationState === IdentificationState.POSITIONING;
     if (!isFaceRecognitionNeeded) return;
 
     const interval = setInterval(async () => {
@@ -214,8 +173,9 @@ const FaceDetector = memo(function FaceDetector({
 
       if (detection) {
         if (isFaceInTheCenter(detection)) {
+          // Emulate requests
           setIdentificationState(IdentificationState.PENDING);
-          onFaceDetect();
+          await onFaceDetect();
         }
       }
     }, 1000);
@@ -229,14 +189,27 @@ const FaceDetector = memo(function FaceDetector({
     setPlaying(true);
   }, []);
 
+  const submitPhoto = useCallback(async () => {
+    if (detectFace || identificationState != IdentificationState.POSITIONING)
+      return;
+    setIdentificationState(IdentificationState.PENDING);
+    await onFaceDetect();
+  }, [detectFace, identificationState]);
+
   return (
     <div className="flex h-max flex-col items-center justify-between">
-      <div className="video-box-size  pc:!h-[190px] relative flex items-center justify-center overflow-hidden">
+      <div
+        className="video-box-size relative flex items-center justify-center overflow-hidden"
+        onClick={submitPhoto}
+      >
         <div className="video-container relative flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
             onPlay={handleReplay}
-            className="relative h-full w-full -scale-x-100 transform-gpu object-cover"
+            className={
+              "relative h-full w-full transform-gpu object-cover" +
+              (detectFace ? " " + "-scale-x-100" : "")
+            }
             autoPlay
             playsInline
             muted
@@ -248,27 +221,32 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        {cameraFacing !== "environment" ? <div
+        <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
             maskSize: "100% 100%",
-            
+            maskImage: detectFace
+              ? "url(/assets/face-overlay.png)"
+              : "url(/assets/photo-overlay.png)",
           }}
-          className="video-box-size pc:!h-[190px] video-overlay-background-mask absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
-        ></div> : ""}
+          className="video-box-size absolute left-0 top-0 z-10 transition-all duration-500 ease-in"
+        ></div>
         <div
           style={{
             opacity:
               identificationState === IdentificationState.SUCCESS ? 1 : 0,
+            maskSize: "100% 100%",
+            maskImage: detectFace
+              ? "url(/assets/face-overlay.png)"
+              : "url(/assets/photo-overlay.png)",
           }}
           className={
-            "video-box-size video-overlay-background-mask absolute left-0 top-0 z-10 bg-gradient-to-l from-[#64FF54] to-[#00DD89] transition-all duration-500 ease-in"
+            "video-box-size absolute left-0 top-0 z-10 bg-gradient-to-l from-[#64FF54] to-[#00DD89] transition-all duration-500 ease-in"
           }
         ></div>
       </div>
-  
-      <div className="ml-4 mr-4 mt-3 text-center text-lg leading-5 font-bold text-white">
+      <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
         {textForState(identificationState)
           .split("\n")
           .map((text) => (

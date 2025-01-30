@@ -1,8 +1,9 @@
-import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import { createContext, useContext, useMemo } from "react";
+import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import RootStore from "../../stores/RootStore";
 
-const Context = createContext<RootStore | null>(null);
+const Context = createContext<null | RootStore>(null);
+
 interface StoreProviderProps {
   children: React.ReactNode;
 }
@@ -16,11 +17,11 @@ const StoreProvider = ({ children }: StoreProviderProps) => {
 };
 
 const useStore = () => {
-    const store = useContext(Context);
-    if (store === null)
-      throw new Error("Please use this hook inside StoreProvider");
-    return store;
-  };
+  const store = useContext(Context);
+  if (store === null)
+    throw new Error("Please use this hook inside StoreProvider");
+  return store;
+};
 
-  export default StoreProvider;
-  export { useStore };
+export default StoreProvider;
+export { useStore };

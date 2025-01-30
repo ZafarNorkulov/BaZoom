@@ -1,12 +1,12 @@
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import FaceDetector, {
   IdentificationState,
 } from "../../components/face-detector/FaceDetector";
 import { registerUser } from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { useInitData } from "@vkruglikov/react-telegram-web-app";
-import { StreamContext, StreamReadyContext } from "../../context/StreamCotext";
 import i18next from "i18next";
+import { useCamera } from "../../components/camera-provider/CameraProvider";
 
 function textForState(identificationState: IdentificationState) {
   switch (identificationState) {
@@ -24,25 +24,25 @@ function textForState(identificationState: IdentificationState) {
 function RegistrationFace() {
   const [, initData] = useInitData();
   const navigate = useNavigate();
-  const stream = useContext(StreamContext)!;
-  const streamReady = useContext(StreamReadyContext);
+  const [stream, streamReady] = useCamera();
   const register = useCallback(
     async (photo: string) => {
       if (initData) {
         const res = (await registerUser(initData, photo)) !== null;
-        setTimeout(() => navigate("/"), 7000);
+        setTimeout(() => navigate("/main"), 7000);
         return res;
       } else return false;
     },
     [initData],
   );
   return (
-    <div className="flex flex-col items-center pt-10">
+    <div className="mt-4 flex w-full flex-col items-center pt-10">
       {streamReady ? (
         <FaceDetector
           tryProcessFaceData={register}
-          externalStream={stream.current!}
+          externalStream={stream}
           textForState={textForState}
+          detectFace
         />
       ) : (
         ""
