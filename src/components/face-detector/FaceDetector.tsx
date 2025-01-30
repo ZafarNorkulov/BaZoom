@@ -80,7 +80,7 @@ interface FaceDetectorProps {
   textForState?: (state: IdentificationState) => string;
   externalStream?: MediaStream;
   cameraFacing?: "user" | "environment";
-  detectFace:boolean
+  detectFace?: boolean;
 }
 
 const FaceDetector = memo(function FaceDetector({
