@@ -1,58 +1,94 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  getUserVideos,
-  publishVideo,
-  VideoConract,
-} from "../../services/VideoService";
+import { publishVideo, VideoContract } from "../../services/VideoService";
 import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import VideoItem from "./VideoItem";
 import cancelIcon from "./assets/cancel.svg";
 import { useTranslation } from "react-i18next";
 import OptionalButton from "../../components/optional-button/OptionalButton";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../components/store-provider/StoreProvider";
+import VideoListStore from "../../stores/VideoListStore";
 
-function VideosPage() {
-  const [videos, setVideos] = useState<VideoConract[]>([]);
-  const [total, setTotal] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const limit = 10;
+interface VideoItemProps {
+  onPublishClick: (v: VideoContract) => void;
+  videoStore: VideoListStore;
+}
+const VideoItems = observer(
+  ({ videoStore, onPublishClick }: VideoItemProps) => {
+    return (
+      <>
+        {videoStore.items.map((v, idx) => (
+          <VideoItem
+            key={idx}
+            onPublishClick={() => onPublishClick(v)}
+            playbackUrl={v.playback_url}
+            published={v.published}
+            createdAt={v.created_at}
+            reward={v.reward}
+          />
+        ))}
+      </>
+    );
+  },
+);
+
+const PhotoCount = observer(() => {
+  const { userStore } = useStore();
+  const { t } = useTranslation();
+
+  const count = userStore.photoCount;
+  const percentCreation = Math.min(count / 10, 1) * 100;
+  const percentMax = Math.min(count / 100, 1) * 100;
+
+  const isCreation = percentCreation < 100;
+
+  const barPercent = isCreation ? percentCreation : percentMax;
+  const barColor = isCreation
+    ? "taxi-gradient"
+    : "bg-gradient-to-l from-[#64FF54] to-[#00DD89]";
+  const hintText = isCreation
+    ? t("pages.boosts.video.toCreateAVideo")
+    : t("pages.boosts.video.tillMax");
+
+  useEffect(() => {
+    userStore.fetchPhotoCount();
+  }, [userStore]);
+
+  return (
+    <div className="flex w-full flex-col items-start rounded-xl bg-dimgray p-2">
+      <div
+        className={barColor + " " + "h-8 rounded-xl transition-all"}
+        style={{ width: `${barPercent.toFixed(2)}%` }}
+      ></div>
+      <p className="mt-1 w-full text-center">
+        {count} / {isCreation ? 10 : 100} {hintText}
+      </p>
+    </div>
+  );
+});
+
+const VideosPage = observer(() => {
   const [, initData] = useInitData();
   const [showPublicationPopup, setShowPublicationPopup] = useState(false);
   const [comment, setComment] = useState("");
   const [pending, setPending] = useState(false);
   const [publishingVideo, setPublishingVideo] = useState<
-    VideoConract | undefined
+    VideoContract | undefined
   >(undefined);
 
   const { t } = useTranslation();
 
   const observerTarget = useRef(null);
 
-  useEffect(() => {
-    getUserVideos(initData!, offset, limit).then((resp) => {
-      setTotal(resp.total);
-      setVideos(resp.videos);
-    });
-  }, []);
-
-  const fetchVideos = useCallback(async () => {
-    if (loading) return;
-    if (offset >= total) return;
-    setLoading(true);
-    try {
-      const newVideos = await getUserVideos(initData!, limit, offset);
-      setVideos((videos) => [...videos, ...newVideos.videos]);
-      setOffset((offset) => Math.min(offset + limit, total));
-    } finally {
-      setLoading(false);
-    }
-  }, [limit, initData, offset, total]);
+  const { videoStore } = useStore();
 
   useEffect(() => {
+    if (videoStore.loading || !videoStore.hasMore) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          fetchVideos();
+          videoStore.fetchNewItems();
         }
       },
       { threshold: 1 },
@@ -67,9 +103,9 @@ function VideosPage() {
         observer.unobserve(observerTarget.current);
       }
     };
-  }, [fetchVideos]);
+  }, [videoStore]);
 
-  const onPublishClick = useCallback((v: VideoConract) => {
+  const onPublishClick = useCallback((v: VideoContract) => {
     setShowPublicationPopup(true);
     setPublishingVideo(v);
   }, []);
@@ -78,7 +114,7 @@ function VideosPage() {
     setPending(true);
     await publishVideo(initData!, publishingVideo!.id, comment);
     publishingVideo!.published = true;
-    setVideos([...videos]);
+    videoStore.items = [...videoStore.items];
     setPending(false);
     setShowPublicationPopup(false);
   };
@@ -115,19 +151,11 @@ function VideosPage() {
       ) : (
         ""
       )}
-      {videos.map((v, idx) => (
-        <VideoItem
-          key={idx}
-          onPublishClick={() => onPublishClick(v)}
-          playbackUrl={v.playback_url}
-          published={v.published}
-          createdAt={v.created_at}
-          reward={v.reward}
-        />
-      ))}
+      <PhotoCount />
+      <VideoItems onPublishClick={onPublishClick} videoStore={videoStore} />
       <div ref={observerTarget}></div>
     </div>
   );
-}
+});
 
 export default VideosPage;

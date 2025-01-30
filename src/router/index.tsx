@@ -9,7 +9,6 @@ import WorkInProgressPage from "../pages/work-in-progress/WorkInProgressPage";
 import FriendsPage from "../pages/friends/FriendsPage";
 import FriendList from "../pages/friend-list/FriendList";
 import BoostsBage from "../pages/boosts/BoostsPage";
-import VideosPage from "../pages/videos/VideosPage";
 import RegisterPage from "../pages/register/RegisterPage";
 import History from "../pages/history";
 import BuyingBoost from "../pages/boosts/buying";
@@ -18,6 +17,7 @@ import ExchangeVariants from "../pages/boosts/exchange/variants";
 import BuyBoostMarket from "../pages/boosts/market";
 import WaysOfMining from "../pages/ways-mining";
 import Detector from "../pages/ways-mining/detector";
+import VideosPage from "../pages/videos/VideosPage";
 
 
 const Router = () => {
@@ -41,7 +41,7 @@ const Router = () => {
             { path: "/friends", element: <FriendsPage /> },
             { path: "/friends/list", element: <FriendList /> },
             { path: "/boosts", element: <BoostsBage /> },
-            { path: "/boosts/videos", element: <VideosPage /> },
+            { path: "/videos", element: <VideosPage /> },
             { path: "/boosts/buy", element: <BuyingBoost /> },
             { path: "/boosts/exchange", element: <BuyBoostExchange /> },
             { path: "/boosts/exchange/variants", element: <ExchangeVariants /> },

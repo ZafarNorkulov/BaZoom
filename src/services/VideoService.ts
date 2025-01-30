@@ -1,4 +1,4 @@
-interface VideoConract {
+interface VideoContract {
   id: string;
   playback_url: string;
   reward: number;
@@ -7,9 +7,10 @@ interface VideoConract {
 }
 
 interface VideoResponseContract {
-  total: number;
-  videos: VideoConract[];
+  items: VideoContract[]; // Foydalanuvchining videolari
+  total: number; // Jami videolar soni
 }
+
 
 async function getUserVideos(
   initData: string,
@@ -27,7 +28,7 @@ async function getUserVideos(
 
 async function publishVideo(initData: string, id: string, comment: string) {
   const req = { id: id, comment: comment };
-  await fetch(`/api/videos/publish`, {
+  await fetch(`/apivideos/publish`, {
     method: "POST",
     headers: { "Init-Data": initData, "Content-Type": "application/json" },
     body: JSON.stringify(req),
@@ -35,11 +36,11 @@ async function publishVideo(initData: string, id: string, comment: string) {
 }
 
 async function createVideo(initData: string) {
-  await fetch(`/api/videos/create`, {
+  await fetch(`/apivideos/create`, {
     method: "GET",
     headers: { "Init-Data": initData },
   });
 }
 
 export { getUserVideos, publishVideo, createVideo };
-export type { VideoConract };
+export type { VideoContract, VideoResponseContract};

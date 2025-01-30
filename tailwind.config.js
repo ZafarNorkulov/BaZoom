@@ -50,7 +50,7 @@ export default {
       screens: {
         "mobile-s": { max: "360px" },
         short: { raw: "(max-height: 770px)" },
-        pc: { raw: "(min-height:500px) and (max-height: 600px)" },
+        pc: { raw: "(max-height: 600px)" },
       },
     },
   },

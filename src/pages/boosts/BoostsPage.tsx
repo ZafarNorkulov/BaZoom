@@ -53,7 +53,7 @@ function BoostsBage() {
                   header={t("pages.boosts.video.header")}
                   description={t("pages.boosts.video.description")}
                   price={t("pages.boosts.video.price")}
-                  link="/boosts/videos"
+                  link="/videos"
                   image={videoImage}
                   active
                 />
@@ -61,7 +61,7 @@ function BoostsBage() {
                   header={t("pages.boosts.onchain.header")}
                   description={t("pages.boosts.onchain.description")}
                   price={t("pages.boosts.onchain.price")}
-                  link="/boosts/videos"
+                  link="/videos"
                   image={onChain}
                   button={t("pages.boosts.perform")}
                   active
@@ -70,7 +70,7 @@ function BoostsBage() {
                   header={t("pages.boosts.support.header")}
                   description={t("pages.boosts.support.description")}
                   price={t("pages.boosts.support.price")}
-                  link="/boosts/videos"
+                  link="/videos"
                   image={support}
                   button={t("pages.boosts.perform")}
                   active

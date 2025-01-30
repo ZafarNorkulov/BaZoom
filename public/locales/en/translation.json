@@ -92,9 +92,12 @@
       "video": {
         "header": "Publish a video of the token mining process",
         "description": "Videos are created automatically daily. To create a video, you need to mine tokens at least 10 times!",
-        "price": "1K/photo",
+        "price": "10K per photo",
+        "priceWithout": "1K per photo",
         "publication": "Publication",
-        "comment": "Comment"
+        "comment": "Comment",
+        "toCreateAVideo": "to create a video",
+        "tillMax": "untill maximal reward"
       },
       "voucher": {
         "header": "Buy and hold a voucher from premarket",
