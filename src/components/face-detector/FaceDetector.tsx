@@ -258,7 +258,7 @@ const FaceDetector = memo(function FaceDetector({
             height={VIDEO_RESOLUTION_HEIGHT}
           />
         </div>
-        {cameraFacing == "user" ? <div
+        {cameraFacing != "environment" ? <div
           style={{
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
