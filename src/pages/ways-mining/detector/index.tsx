@@ -73,8 +73,7 @@ const Detector = () => {
   }
 
 
-  const detectFace = userStore.profile.has_verification_photo;
-  const params = searchParams.get("face") === "true"
+  const detectFace = searchParams.get("face") === "true";
 
   return (
     <section>
@@ -82,8 +81,7 @@ const Detector = () => {
         {detectFace}
         {isDetectingEnabled && streamReady && (
           <FaceDetector tryProcessFaceData={onFaceDetect} textForState={detectFace ? textForState : textForStateUnverified} externalStream={stream}
-            cameraFacing={params ? "user" : "environment"}
-            detectFace={detectFace}
+            cameraFacing={detectFace ? "user" : "environment"}
 
           />)}
         <BalanceStatus store={userStore} />
