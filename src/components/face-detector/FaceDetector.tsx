@@ -205,7 +205,7 @@ const FaceDetector = memo(function FaceDetector({
 
   useEffect(() => {
     const isFaceRecognitionNeeded =
-      detectFace && isPlaying && identificationState === IdentificationState.POSITIONING;
+    isPlaying && identificationState === IdentificationState.POSITIONING;
     if (!isFaceRecognitionNeeded) return;
 
     const interval = setInterval(async () => {
@@ -225,7 +225,7 @@ const FaceDetector = memo(function FaceDetector({
     return () => {
       clearInterval(interval);
     };
-  }, [identificationState, isPlaying,detectFace]);
+  }, [identificationState, isPlaying]);
 
   const handleReplay = useCallback(() => {
     setPlaying(true);
