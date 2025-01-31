@@ -1,18 +1,20 @@
 import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import { useCamera } from "../../../components/camera-provider/CameraProvider";
 import FaceDetector, { IdentificationState } from "../../../components/face-detector/FaceDetector"
-import { useCallback, useEffect, useState } from "react";
+import { useCallback,  useState } from "react";
 import { submitPhoto } from "../../../services/PhotoService";
-import { useStore } from "../../../components/store-provider/StoreProvider";
 import { useTranslation } from "react-i18next";
 import BalanceStatus from "../../../components/balanceStatus";
+import { useSearchParams } from "react-router-dom";
+import { useStore } from "../../../components/store-provider/StoreProvider";
 
 const Detector = () => {
     const [isDetectingEnabled, setDetectingEnabled] = useState(true);
     const [stream, streamReady] = useCamera();
     const [, initData] = useInitData();
-    const { userStore } = useStore();
     const { t } = useTranslation()
+    const [searchParams] = useSearchParams()
+    const {userStore} = useStore()
 
 
     const onFaceDetect = useCallback(
@@ -31,13 +33,13 @@ const Detector = () => {
         [initData],
     );
 
-    const updateBalance = useCallback(() => {
-        userStore.fetchProfileInfo();
-    }, [userStore]);
+    // const updateBalance = useCallback(() => {
+    //     userStore.fetchProfileInfo();
+    // }, [searchParams]);
 
-    useEffect(() => {
-        updateBalance();
-    }, [updateBalance]);
+    // useEffect(() => {
+    //     updateBalance();
+    // }, [updateBalance]);
 
 
     function textForState(identificationState: IdentificationState) {
@@ -47,7 +49,7 @@ const Detector = () => {
           case IdentificationState.PENDING:
             return t("pages.main.scannerStates.pending");
           case IdentificationState.SUCCESS:
-            updateBalance();
+            // updateBalance();
             return t("pages.main.scannerStates.success");
           case IdentificationState.ERROR:
             return t("pages.main.scannerStates.error");
@@ -63,7 +65,7 @@ const Detector = () => {
           case IdentificationState.PENDING:
             return t("pages.main.scannerStates.pendingWithout");
           case IdentificationState.SUCCESS:
-            updateBalance();
+            // updateBalance();
             return t("pages.main.scannerStates.successWithout");
           case IdentificationState.ERROR:
             return t("pages.main.scannerStates.errorWithout");
@@ -71,7 +73,7 @@ const Detector = () => {
       }
 
 
-      const detectFace = userStore.profile.has_verification_photo;
+       const detectFace = searchParams.get("face") === "true";
 
     return (
         <section>
@@ -81,7 +83,8 @@ const Detector = () => {
                      tryProcessFaceData={onFaceDetect}
                      textForState={detectFace ? textForState : textForStateUnverified}
                      externalStream={stream}
-                     detectFace={detectFace}
+                    //  detectFace={detectFace}
+                    cameraFacing={detectFace ? "user" : "environment"}
                    />)}
                     <BalanceStatus store={userStore}/>
             </div>

@@ -42,7 +42,7 @@ function RegistrationFace() {
           tryProcessFaceData={register}
           externalStream={stream}
           textForState={textForState}
-          detectFace
+          // detectFace
         />
       ) : (
         ""

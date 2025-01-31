@@ -78,14 +78,14 @@ interface FaceDetectorProps {
   tryProcessFaceData?: (data: string) => Promise<boolean>;
   textForState?: (state: IdentificationState) => string;
   externalStream?: MediaStream;
-  detectFace: boolean;
+  cameraFacing?:"user" | "environment"
 }
 
 const FaceDetector = memo(function FaceDetector({
   tryProcessFaceData,
   textForState,
   externalStream,
-  detectFace,
+  cameraFacing = "environment",
 }: FaceDetectorProps) {
   const [isInitializing, setInitiallzing] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -160,7 +160,7 @@ const FaceDetector = memo(function FaceDetector({
   // Interval For face detection
   useEffect(() => {
     const isFaceRecognitionNeeded =
-      detectFace &&
+      
       isPlaying &&
       identificationState === IdentificationState.POSITIONING;
     if (!isFaceRecognitionNeeded) return;
@@ -190,11 +190,11 @@ const FaceDetector = memo(function FaceDetector({
   }, []);
 
   const submitPhoto = useCallback(async () => {
-    if (detectFace || identificationState != IdentificationState.POSITIONING)
+    if (identificationState != IdentificationState.POSITIONING)
       return;
     setIdentificationState(IdentificationState.PENDING);
     await onFaceDetect();
-  }, [detectFace, identificationState]);
+  }, [ identificationState]);
 
   return (
     <div className="flex h-max flex-col items-center justify-between">
@@ -208,7 +208,7 @@ const FaceDetector = memo(function FaceDetector({
             onPlay={handleReplay}
             className={
               "relative h-full w-full transform-gpu object-cover" +
-              (detectFace ? " " + "-scale-x-100" : "")
+              (cameraFacing == "user" ? " " + "-scale-x-100" : "")
             }
             autoPlay
             playsInline
@@ -226,7 +226,7 @@ const FaceDetector = memo(function FaceDetector({
             background: overlayBackgroundFromState(identificationState),
             opacity: isInitializing ? 0 : 1,
             maskSize: "100% 100%",
-            maskImage: detectFace
+            maskImage: cameraFacing == "user"
               ? "url(/assets/face-overlay.png)"
               : "url(/assets/photo-overlay.png)",
           }}
@@ -237,7 +237,7 @@ const FaceDetector = memo(function FaceDetector({
             opacity:
               identificationState === IdentificationState.SUCCESS ? 1 : 0,
             maskSize: "100% 100%",
-            maskImage: detectFace
+            maskImage: cameraFacing == "user"
               ? "url(/assets/face-overlay.png)"
               : "url(/assets/photo-overlay.png)",
           }}
