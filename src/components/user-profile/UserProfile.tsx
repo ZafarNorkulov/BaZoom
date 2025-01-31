@@ -4,9 +4,7 @@ import silver from "./assests/silver.svg";
 import gold from "./assests/gold.svg";
 import bronze from "./assests/bronze.svg";
 import { useEffect, useState } from "react";
-import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import i18next from "i18next";
-import { getProfilePhotoUrl } from "../../services/UserService";
 
 export enum UserLevel {
   Novice,
@@ -56,12 +54,18 @@ interface UserProfileProps {
 function UserProfile({ userLevel, name, userId, secondary }: UserProfileProps) {
   const { icon, text } = statusFromLevel(userLevel);
   const [profilePhoto, setProfilePhoto] = useState<string>(userPic);
-  const [, initData] = useInitData();
 
   useEffect(() => {
-    getProfilePhotoUrl(initData!, userId).then((url) => {
-      if (url) setProfilePhoto(url);
-    });
+
+    const telegram = (window as any).Telegram.WebApp;
+    const user = telegram.initDataUnsafe?.user;
+    if (user) {
+      const { photo_url } = user;
+      if (photo_url) {
+        setProfilePhoto(photo_url);
+        console.log(userId)
+      }
+    }
   }, []);
   return (
     <div className="flex h-10 max-w-[100%] flex-row items-center">
