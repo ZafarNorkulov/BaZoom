@@ -34,6 +34,7 @@ function Header() {
 
   }, [userId]);
   console.log(gameData);
+  
 
 
   return (
