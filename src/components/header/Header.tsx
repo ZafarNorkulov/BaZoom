@@ -26,7 +26,7 @@ function Header() {
 
   useEffect(() => {
     if (!userId) return;
-    fetch(`${api}/dice/balance?user_id=${userId}`, {
+    fetch(`https://bot.bazoom.ru/api/dice/balance?user_id=${userId}`, {
       method: "GET",
     })
       .then((res) => res.json())
