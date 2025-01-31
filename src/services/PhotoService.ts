@@ -28,10 +28,10 @@ function b64toBlob(
 }
 
 function photoToBlob(photo: string): Blob {
-  const block = photo.split(";");
+  const block = photo?.split(";");
 
-  const contentType = block[0].split(":")[1];
-  const data = block[1].split(",")[1];
+  const contentType = block[0]?.split(":")[1];
+  const data = block[1]?.split(",")[1];
 
   return b64toBlob(data, contentType);
 }

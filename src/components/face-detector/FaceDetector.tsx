@@ -248,7 +248,7 @@ const FaceDetector = memo(function FaceDetector({
       </div>
       <div className="ml-4 mr-4 pt-6 text-center text-lg font-bold text-white">
         {textForState(identificationState)
-          .split("\n")
+          ?.split("\n")
           .map((text) => (
             <p key={text}>{text}</p>
           ))}
