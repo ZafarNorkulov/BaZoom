@@ -2,9 +2,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { StreamContext, StreamReadyContext } from "../../context/StreamCotext";
 import { useShowPopup } from "@vkruglikov/react-telegram-web-app";
 import { useTranslation } from "react-i18next";
-import { Outlet, useNavigate, } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useStore } from "../store-provider/StoreProvider.tsx";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../store-provider/StoreProvider";
 
 const CameraProvider = observer(() => {
   const streamRef = useRef<MediaStream>();

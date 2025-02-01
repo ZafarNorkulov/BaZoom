@@ -41,7 +41,7 @@ async function updateProfile(
   return await (resp.json() as Promise<UserProfileContract>);
 }
 
-async function registerUser(initData: string, verificationPhoto: string) {
+async function registerUser(initData: string, verificationPhoto: string | undefined) {
   const formData = new FormData();
   const blob = photoToBlob(verificationPhoto);
   formData.append("verification_photo", blob);
