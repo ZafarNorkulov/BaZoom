@@ -22,10 +22,11 @@ function textForState(identificationState: IdentificationState) {
 }
 
 function RegistrationFace() {
-  const [, initData] = useInitData();
+  // const [, initData] = useInitData();
   const navigate = useNavigate();
   const [stream, streamReady] = useCamera();
   // const initData = `user=%7B%22id%22%3A1742336847%2C%22first_name%22%3A%22Zafar%22%2C%22last_name%22%3A%22Norkulov%22%2C%22username%22%3A%22Zafar_Norkulov%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2F4OQHgqkBTQzZX8WGfD-hlRPvpUjXNuMNwFMpYDjE2pQ.svg%22%7D&auth_date=1738397696&signature=n17j-FeozqpC9-OBhm-0yTvuGL3LzB84MM9EqNacUIc42JPSjcwD16ElmtUij2H7EAST0fj5XtCeQjvy6H7NDA&hash=a42ba7c1f3bbad4bbc6b36e80ad1ec377a8ff12a814e827852ca0d5515f24704`
+  const initData = (window as any).Telegram.WebApp.initDataUnsafe;
   const register = useCallback(
     async (photo: string) => {
       if (initData) {
