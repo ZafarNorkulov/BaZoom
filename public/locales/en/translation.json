@@ -72,9 +72,20 @@
       "empty": "There is no one here yet"
     },
     "registration": {
-      "registration": "Registration",
       "instructions": "To register, you will need to create a mental image. To do this, follow the instructions on the next page. Attention! Your face should be clearly visible on the scanner when you repeat to yourself 'I want to get a lot of $DICE'!",
       "continue": "Continue",
+      "registration": "Mining option",
+      "method1": {
+        "caption": "Option #1",
+        "name": "With face scanning",
+        "text": "10 times more profitable mining by creating a photo of your face when mining $DICE from your memory block, and then creating a video clip from them."
+      },
+      "method2": {
+        "caption": "Option #2",
+        "name": "Without face scanning",
+        "text": "Mining by uploading photos you created from your smartphone's rear camera and then automatically converting them into videos."
+      },
+      "subheader": "Chose the mining method that right for you and click on it",
       "scannerStates": {
         "positioning": "Align your face with the mind scanner and repeat to yourself the phrase - 'I want to get a lot of $DICE tokens!'",
         "pending": "The mind scanner is calculating your mental image.",
@@ -146,7 +157,7 @@
       "exchangeText": "Fish is a text with a description of what buying on the stock exchange is. Fish-text, fish-text, text, text, text."
     },
     "boostMarket": {
-      "head":"Buying a boost by market",
+      "head": "Buying a boost by market",
       "choosingToken": "Choosing a token",
       "buy": "BUY",
       "confirm": "Confirm",
@@ -171,17 +182,17 @@
         "button1": "Buy",
         "button2": "Sell",
         "limit": "Limit",
-        "balance":"Balance",
+        "balance": "Balance",
         "total": "Total"
       },
-      "orders":{
-        "checkbox":"Hide other pairs.",
-        "cards":{
-          "title":"Purchase Limit",
-          "button":"Cancel the order",
-          "rate":"Rate",
-          "quantity":"Qty",
-          "completed":"Completed"
+      "orders": {
+        "checkbox": "Hide other pairs.",
+        "cards": {
+          "title": "Purchase Limit",
+          "button": "Cancel the order",
+          "rate": "Rate",
+          "quantity": "Qty",
+          "completed": "Completed"
         }
       },
       "tabs": {
@@ -190,7 +201,7 @@
         "tab3": "grafic"
       }
     },
-   
+
     "telegramRedirect": {
       "title": "Better Experience in Telegram",
       "description": "This game works best in Telegram. Click below to open in Telegram.",
