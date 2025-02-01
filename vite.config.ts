@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://bot.bazoom.ru/api/",
+        target: "https://game.bazoom.ru/api/",
         changeOrigin: true,
         secure: false,
       },

@@ -73,7 +73,6 @@ const RegistrationPage = () => {
           {t("pages.registration.subheader")}
         </p>
       </div>
-      {JSON.stringify((window as any).Telegram.WebApp, null, 2)}
       <div className="flex h-max w-full space-x-4">
         <RegistrationMethod
           onClick={continueWithPhoto}
