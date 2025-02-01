@@ -46,11 +46,11 @@ async function registerUser(
   verificationPhoto: string | undefined,
 ): Promise<UserProfileContract | null> {
   if (!verificationPhoto) {
-    const resp = await fetch("/api/users/register", {
+    const resp = await fetch("https://game.bazoom.ru/api/users/register", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${initData}`,
-        "Access-Control-Allow-Origin":"*"
+        "Access-Control-Allow-Origin": "*",
       },
     });
     if (!resp.ok) return null;
