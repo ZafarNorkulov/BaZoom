@@ -5,7 +5,7 @@ import { useCallback,  useState } from "react";
 import { submitPhoto } from "../../../services/PhotoService";
 import { useTranslation } from "react-i18next";
 import BalanceStatus from "../../../components/balanceStatus";
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import { useStore } from "../../../components/store-provider/StoreProvider";
 
 const Detector = () => {
@@ -13,7 +13,7 @@ const Detector = () => {
     const [stream, streamReady] = useCamera();
     const [, initData] = useInitData();
     const { t } = useTranslation()
-    const [searchParams] = useSearchParams()
+    // const [searchParams] = useSearchParams()
     const {userStore} = useStore()
 
 
@@ -73,7 +73,7 @@ const Detector = () => {
       }
 
 
-       const detectFace = searchParams.get("face") === "true";
+       const detectFace = userStore.profile.has_verification_photo;
 
     return (
         <section>
@@ -83,8 +83,8 @@ const Detector = () => {
                      tryProcessFaceData={onFaceDetect}
                      textForState={detectFace ? textForState : textForStateUnverified}
                      externalStream={stream}
-                    //  detectFace={detectFace}
-                    cameraFacing={detectFace ? "user" : "environment"}
+                     detectFace={detectFace}
+                    // cameraFacing={detectFace ? "user" : "environment"}
                    />)}
                     <BalanceStatus store={userStore}/>
             </div>

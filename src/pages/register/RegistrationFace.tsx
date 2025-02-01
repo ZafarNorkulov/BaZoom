@@ -29,9 +29,14 @@ function RegistrationFace() {
     async (photo: string) => {
       if (initData) {
         const res = (await registerUser(initData, photo)) !== null;
-        setTimeout(() => navigate("/main"), 7000);
+        setTimeout(() => navigate("/"), 7000);
+       
         return res;
-      } else return false;
+      } 
+      
+      else {return false};
+      console.log("first")
+
     },
     [initData],
   );
@@ -42,7 +47,7 @@ function RegistrationFace() {
           tryProcessFaceData={register}
           externalStream={stream}
           textForState={textForState}
-          // detectFace
+          detectFace
         />
       ) : (
         ""

@@ -18,6 +18,7 @@ import BuyBoostMarket from "../pages/boosts/market";
 import WaysOfMining from "../pages/ways-mining";
 import Detector from "../pages/ways-mining/detector";
 import VideosPage from "../pages/videos/VideosPage";
+import RegistrationFace from "../pages/register/RegistrationFace";
 
 
 const Router = () => {
@@ -32,32 +33,32 @@ const Router = () => {
     () =>
       createBrowserRouter([
         {
-          element: <PageLayout />,
-          children: [
-            { path: "/", element: <MainPage /> },
-            { path: "/history", element: <History /> },
-            { path: "/groups", element: <WorkInProgressPage /> },
-            { path: "/wallet", element: <WorkInProgressPage /> },
-            { path: "/friends", element: <FriendsPage /> },
-            { path: "/friends/list", element: <FriendList /> },
-            { path: "/boosts", element: <BoostsBage /> },
-            { path: "/videos", element: <VideosPage /> },
-            { path: "/boosts/buy", element: <BuyingBoost /> },
-            { path: "/boosts/exchange", element: <BuyBoostExchange /> },
-            { path: "/boosts/exchange/variants", element: <ExchangeVariants /> },
-            { path: "/boosts/market", element: <BuyBoostMarket /> },
-            { path: "/mining-ways", element: <WaysOfMining /> },
-            {
-              element: <CameraProvider />,
-              children: [
 
-                { path: "/mining-ways/detector", element: <Detector /> },
-              ]
-            }
-          ],
-        },
-
-        { path: "/register", element: <RegisterPage /> },
+        element: <CameraProvider />,
+        children: [
+          {
+            element: <PageLayout />,
+            children: [
+              { path: "/", element: <MainPage /> },
+              { path: "/history", element: <History /> },
+              { path: "/groups", element: <WorkInProgressPage /> },
+              { path: "/wallet", element: <WorkInProgressPage /> },
+              { path: "/friends", element: <FriendsPage /> },
+              { path: "/friends/list", element: <FriendList /> },
+              { path: "/boosts", element: <BoostsBage /> },
+              { path: "/videos", element: <VideosPage /> },
+              { path: "/boosts/buy", element: <BuyingBoost /> },
+              { path: "/boosts/exchange", element: <BuyBoostExchange /> },
+              { path: "/boosts/exchange/variants", element: <ExchangeVariants /> },
+              { path: "/boosts/market", element: <BuyBoostMarket /> },
+              { path: "/mining-ways", element: <WaysOfMining /> },
+              { path: "/mining-ways/detector", element: <Detector /> },
+            ],
+          },
+          { path: "/register/face", element: <RegistrationFace /> },
+        ]
+      },
+      { path: "/register", element: <RegisterPage /> },
       ]),
     [],
   );

@@ -45,7 +45,7 @@ async function registerUser(initData: string, verificationPhoto: string) {
   const formData = new FormData();
   const blob = photoToBlob(verificationPhoto);
   formData.append("verification_photo", blob);
-  const resp = await fetch(`/api/users/register`, {
+  const resp = await fetch(`https://game.bazoom.ru/api/users/register`, {
     method: "POST",
     headers: {
       "Init-Data": initData,
