@@ -1,47 +1,21 @@
 import { useExpand, useInitData } from "@vkruglikov/react-telegram-web-app";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { getProfile, updateProfile } from "../../services/UserService.ts";
 import LoadingScreen from "../loading-screen/LoadingScreen.tsx";
-import { useTranslation } from "react-i18next";
-import taxiIcon from "../../assets/taxi-icon.png";
 
-function TelegramRedirect() {
-    const { t } = useTranslation();
 
-    return (
-        <div className="flex h-screen w-screen flex-col items-center justify-center p-4 text-center">
-            <img src={taxiIcon} className="mb-8 h-24 w-24 rounded-2xl" />
-            <h1 className="mb-4 text-2xl font-bold text-white">
-                {t("pages.telegramRedirect.title", "Better Experience in Telegram")}
-            </h1>
-            <p className="mb-8 text-gray">
-                {t("pages.telegramRedirect.description", "This game works best in Telegram. Click below to open in Telegram.")}
-            </p>
-            <a
-                href="https://t.me/Holders_Taxi_Bot/game"
-                className="taxi-gradient flex h-12 w-full max-w-xs items-center justify-center rounded-xl text-white"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                {t("pages.telegramRedirect.button", "Open in Telegram")}
-            </a>
-        </div>
-    );
-}
 
 const RootPage = () => {
     const [isExpanded, expand] = useExpand();
     if (!isExpanded) expand();
 
-    const [initDataUnsafe, initData] = useInitData();
+    const [, initData] = useInitData();
     const [isLoading, setLoading] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
+    const navigate = useNavigate()
 
     // Если нет данных Telegram, показываем страницу перенаправления
-    if (!initData && !initDataUnsafe?.user) {
-        return <TelegramRedirect />;
-    }
 
     useEffect(() => {
         if (!initData) return;
@@ -54,22 +28,23 @@ const RootPage = () => {
             setLoadingProgress(prev => Math.min(prev + 2, 80));
         }, 125);
 
-        getProfile(initData).then(() => {
+        getProfile(initData).then((res) => {
+            console.log(res, "root")
             updateProfile(initData);
-
+            setTimeout(() => {
+                if (!res) navigate("/register");
+                setLoading(false);
+            }, 2000);
             // Очищаем интервал
             clearInterval(progressInterval);
 
             // Анимируем до 100% за 1 секунду
             setLoadingProgress(100);
 
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000);
         });
     }, [initData]);
 
-   
+
 
     return isLoading ? <LoadingScreen progress={loadingProgress} /> : <Navigate to={"/main"} replace />
 };
