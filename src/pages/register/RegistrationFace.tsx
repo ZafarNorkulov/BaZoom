@@ -4,7 +4,7 @@ import FaceDetector, {
 } from "../../components/face-detector/FaceDetector";
 import { registerUser } from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
-import { useInitData } from "@vkruglikov/react-telegram-web-app";
+// import { useInitData } from "@vkruglikov/react-telegram-web-app";
 import i18next from "i18next";
 import { useCamera } from "../../components/camera-provider/CameraProvider";
 

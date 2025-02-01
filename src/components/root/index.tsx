@@ -1,4 +1,4 @@
-import { useExpand, useInitData } from "@vkruglikov/react-telegram-web-app";
+import { useExpand } from "@vkruglikov/react-telegram-web-app";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { getProfile, updateProfile } from "../../services/UserService.ts";
