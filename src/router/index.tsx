@@ -19,6 +19,7 @@ import WaysOfMining from "../pages/ways-mining";
 import Detector from "../pages/ways-mining/detector";
 import VideosPage from "../pages/videos/VideosPage";
 import RegistrationFace from "../pages/register/RegistrationFace";
+import RootPage from "../components/root";
 
 
 const Router = () => {
@@ -32,6 +33,7 @@ const Router = () => {
   const router = useMemo(
     () =>
       createBrowserRouter([
+        { path: "/", element: <RootPage /> },
         {
 
         element: <CameraProvider />,
@@ -39,7 +41,7 @@ const Router = () => {
           {
             element: <PageLayout />,
             children: [
-              { path: "/", element: <MainPage /> },
+              { path: "/main", element: <MainPage /> },
               { path: "/history", element: <History /> },
               { path: "/groups", element: <WorkInProgressPage /> },
               { path: "/wallet", element: <WorkInProgressPage /> },
