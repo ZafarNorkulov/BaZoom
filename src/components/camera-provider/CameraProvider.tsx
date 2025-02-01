@@ -1,17 +1,17 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { StreamContext, StreamReadyContext } from "../../context/StreamCotext";
-import { useShowPopup } from "@vkruglikov/react-telegram-web-app";
-import { useTranslation } from "react-i18next";
-import { Outlet, useNavigate } from "react-router-dom";
+// import { useShowPopup } from "@vkruglikov/react-telegram-web-app";
+// import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 import { useStore } from "../store-provider/StoreProvider.tsx";
 import { observer } from "mobx-react-lite";
 
 const CameraProvider = observer(() => {
   const streamRef = useRef<MediaStream>();
   const [streamReady, setStreamReady] = useState(false);
-  const showPopup = useShowPopup();
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  // const showPopup = useShowPopup();
+  // const { t } = useTranslation();
+  // const navigate = useNavigate();
   const { userStore } = useStore();
 
   useEffect(() => {
@@ -32,15 +32,15 @@ const CameraProvider = observer(() => {
         return stream;
       })
       .catch(() => {
-        if (window.location.pathname !== "/register")
-          showPopup({
-            message: t("pages.main.scannerStates.cameraIsNotAllowed"),
-            buttons: [{ text: t("pages.main.scannerStates.inviteFriend") }],
-          }).then(() => navigate("/friends"));
-        else
-          showPopup({
-            message: t("pages.register.cameraIsNotAllowedReg"),
-          }).then(() => window.location.reload());
+        // if (window.location.pathname !== "/register")
+        //   showPopup({
+        //     message: t("pages.main.scannerStates.cameraIsNotAllowed"),
+        //     buttons: [{ text: t("pages.main.scannerStates.inviteFriend") }],
+        //   }).then(() => navigate("/friends"));
+        // else
+        //   showPopup({
+        //     message: t("pages.register.cameraIsNotAllowedReg"),
+        //   }).then(() => window.location.reload());
         return undefined;
       });
     return () => {

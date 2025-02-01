@@ -14,7 +14,7 @@ interface UserProfileContract {
 async function getProfile(
   initData: string,
 ): Promise<UserProfileContract | null> {
-  console.log(initData)
+  console.log(initData);
 
   const resp = await fetch(`/api/users/profile`, {
     method: "GET",
@@ -29,7 +29,7 @@ async function getProfile(
 async function updateProfile(
   initData: string,
 ): Promise<UserProfileContract | null> {
-  console.log(initData)
+  console.log(initData);
   const resp = await fetch(`/api/users/profile`, {
     method: "POST",
     headers: {
@@ -49,7 +49,7 @@ async function registerUser(
     const resp = await fetch("/api/users/register", {
       method: "POST",
       headers: {
-        "Init-Data": initData,
+        Authorization: `Bearer ${initData}`,
       },
     });
     if (!resp.ok) return null;
@@ -75,7 +75,7 @@ async function getProfilePhotoUrl(
   initData: string,
   userId: number,
 ): Promise<string | null> {
-  console.log(initData)
+  console.log(initData);
   const resp = await fetch(`/api/users/profile/photo/${userId}`, {
     method: "GET",
     headers: {

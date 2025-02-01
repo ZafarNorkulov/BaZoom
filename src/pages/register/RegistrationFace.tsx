@@ -29,10 +29,10 @@ function RegistrationFace() {
   const register = useCallback(
     async (photo: string) => {
       if (initData) {
-        await registerUser(initData, photo).then(res => console.log("fhbdkl", res));
-        const res = (await registerUser(initData, photo)) !== null;
+        const res = (await registerUser(initData, photo)) ;
         setTimeout(() => navigate("/main"), 7000);
-        return res;
+        console.log("response",res)
+        return res!==null;
       } else return false;
     },
     [initData],
