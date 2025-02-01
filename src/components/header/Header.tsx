@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Header() {
-  const [initDataUnsafe] = useInitData();
+  const [initDataUnsafe,initData] = useInitData();
   const user = initDataUnsafe!.user!;
   const fullName =
     user?.first_name + (user?.last_name ? " " + user?.last_name : "");
@@ -21,17 +21,24 @@ function Header() {
   const [gameData, setGameData] = useState<any>(null);
 
   const navigate = useNavigate();
-  const userId = user?.id;
+  const userId = 1742336847;
 
-  useEffect(() => {
-    if (!userId) return;
-    fetch(`https://bot.bazoom.ru/api/dice/balance?user_id=${userId}`, {
+  async function getData (data:string): Promise<any>{
+    fetch(`https://bot.bazoom.ru/api/users/profile`, {
       method: "GET",
+      headers: {
+        "Init-Data": data,
+      },
     })
       .then((res) => res.json())
       .then((data) => setGameData(data));
+  }
 
-  }, [userId]);
+  useEffect(() => {
+    if (!(userId && initData)) return;
+    getData(initData);
+  }, [userId,initData]);
+
   console.log(gameData);
 
 
