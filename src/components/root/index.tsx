@@ -39,9 +39,9 @@ const RootPage = () => {
     const [loadingProgress, setLoadingProgress] = useState(0);
 
     // Если нет данных Telegram, показываем страницу перенаправления
-    // if (!initData && !initDataUnsafe?.user) {
-    //     return <TelegramRedirect />;
-    // }
+    if (!initData && !initDataUnsafe?.user) {
+        return <TelegramRedirect />;
+    }
 
     useEffect(() => {
         if (!initData) return;
@@ -69,7 +69,7 @@ const RootPage = () => {
         });
     }, [initData]);
 
-
+   
 
     return isLoading ? <LoadingScreen progress={loadingProgress} /> : <Navigate to={"/main"} replace />
 };
