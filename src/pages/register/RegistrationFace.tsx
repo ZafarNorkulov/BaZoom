@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import FaceDetector, {
   IdentificationState,
 } from "../../components/face-detector/FaceDetector";
@@ -25,9 +25,11 @@ function RegistrationFace() {
   const [, initData] = useInitData();
   const navigate = useNavigate();
   const [stream, streamReady] = useCamera();
+  const [data, setData] = useState<any | null>(null)
   const register = useCallback(
     async (photo: string) => {
       if (initData) {
+        await registerUser(initData, photo).then(res => setData(res));
         const res = (await registerUser(initData, photo)) !== null;
         setTimeout(() => navigate("/main"), 7000);
         return res;
@@ -37,6 +39,7 @@ function RegistrationFace() {
   );
   return (
     <div className="mt-4 flex w-full flex-col items-center pt-10">
+      {JSON.stringify(data, null, 2)}
       {streamReady ? (
         <FaceDetector
           tryProcessFaceData={register}

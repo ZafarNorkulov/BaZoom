@@ -146,8 +146,10 @@ const FaceDetector = memo(function FaceDetector({
       () => {
         if (res) {
           setIdentificationState(IdentificationState.SUCCESS);
+          console.log("success")
         } else {
           setIdentificationState(IdentificationState.ERROR);
+          console.log("error")
           setTimeout(() => {
             setIdentificationState(IdentificationState.POSITIONING);
           }, 4000);
