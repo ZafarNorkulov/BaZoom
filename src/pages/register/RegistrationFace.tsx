@@ -39,6 +39,7 @@ function RegistrationFace() {
   );
   return (
     <div className="mt-4 flex w-full flex-col items-center pt-10">
+      {JSON.stringify(initData, null,2)}
       {streamReady ? (
         <FaceDetector
           tryProcessFaceData={register}
