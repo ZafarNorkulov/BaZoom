@@ -41,11 +41,26 @@ async function updateProfile(
   return await (resp.json() as Promise<UserProfileContract>);
 }
 
-async function registerUser(initData: string, verificationPhoto: string | undefined) {
+async function registerUser(
+  initData: string,
+  verificationPhoto: string | undefined,
+): Promise<UserProfileContract | null> {
+  if (!verificationPhoto) {
+    const resp = await fetch("/api/users/register", {
+      method: "POST",
+      headers: {
+        "Init-Data": initData,
+      },
+    });
+    if (!resp.ok) return null;
+    return await ((await resp.json()) as Promise<UserProfileContract>);
+  }
+
   const formData = new FormData();
   const blob = photoToBlob(verificationPhoto);
   formData.append("verification_photo", blob);
-  const resp = await fetch(`https://game.bazoom.ru/api/users/register`, {
+
+  const resp = await fetch("/api/users/register", {
     method: "POST",
     headers: {
       "Init-Data": initData,
@@ -53,7 +68,7 @@ async function registerUser(initData: string, verificationPhoto: string | undefi
     body: formData,
   });
   if (!resp.ok) return null;
-  return await (resp.json() as Promise<UserProfileContract>);
+  return await ((await resp.json()) as Promise<UserProfileContract>);
 }
 
 async function getProfilePhotoUrl(

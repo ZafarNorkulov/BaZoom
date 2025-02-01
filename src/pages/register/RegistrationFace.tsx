@@ -29,14 +29,9 @@ function RegistrationFace() {
     async (photo: string) => {
       if (initData) {
         const res = (await registerUser(initData, photo)) !== null;
-        setTimeout(() => navigate("/"), 7000);
-       
+        setTimeout(() => navigate("/main"), 7000);
         return res;
-      } 
-      
-      else {return false};
-      console.log("first")
-
+      } else return false;
     },
     [initData],
   );

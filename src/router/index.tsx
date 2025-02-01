@@ -9,7 +9,6 @@ import WorkInProgressPage from "../pages/work-in-progress/WorkInProgressPage";
 import FriendsPage from "../pages/friends/FriendsPage";
 import FriendList from "../pages/friend-list/FriendList";
 import BoostsBage from "../pages/boosts/BoostsPage";
-import RegisterPage from "../pages/register/RegisterPage";
 import History from "../pages/history";
 import BuyingBoost from "../pages/boosts/buying";
 import BuyBoostExchange from "../pages/boosts/exchange";
